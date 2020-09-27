@@ -12,5 +12,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-plugin-react": "^7.21.2",
+    "eslint-plugin-react-hooks": "^4.1.2"
+  }
 }
