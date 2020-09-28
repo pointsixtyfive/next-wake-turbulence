@@ -14,5 +14,5 @@ const Instructions = ({ start }) => {
 export default Instructions;
 
 Instructions.propTypes = {
-  start: PropTypes.bool.isRequired,
+  start: PropTypes.func.isRequired,
 };
