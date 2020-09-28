@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Aircraft = ({ data }) => {
   return (
-    <div className='container'>
+    <div className='flex_container'>
       <div className='box name'>
         <ul>
           <li>A/C</li>

@@ -24,7 +24,7 @@ const Index = ({ isConnected }) => {
   const [waiveAnswer, setWaiveAnswer] = useState(false);
   const [page, setPage] = useState('list');
 
-  const onClick = () => {
+  const handleClick = () => {
     console.log('I was clicked');
   };
 
@@ -39,7 +39,7 @@ const Index = ({ isConnected }) => {
       {/*start quiz page */}
       {start ? <Question /> : <Instructions start={setStart} />}
 
-      <Answers start={start} onClick={onClick} />
+      <Answers start={start} onClick={handleClick} />
 
       <form action='' method='post' name='answer'>
         <fieldset>

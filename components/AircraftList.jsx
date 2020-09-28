@@ -4,13 +4,13 @@ import Aircraft from './Aircraft';
 
 const AircraftList = ({ data, backButton }) => {
   return (
-    <section>
+    <section id='aircraft-list'>
       <h2>List of Aircraft</h2>
-
-      {data.map((aircraft) => (
-        <Aircraft key={aircraft.name} data={aircraft} />
-      ))}
-
+      <div className='flex_container'>
+        {data.map((aircraft) => (
+          <Aircraft key={aircraft.name} data={aircraft} />
+        ))}
+      </div>
       <button id='back' onClick={() => backButton('quiz')}>
         Back to quiz
       </button>

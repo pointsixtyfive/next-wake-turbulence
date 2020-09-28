@@ -144,5 +144,3 @@ const answer = getAnswer();
 questionData.answer = answer;
 
 console.log(questionData);
-
-export default AIRCRAFT;
