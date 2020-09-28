@@ -6,6 +6,8 @@ import Question from '../components/Question';
 import Instructions from '../components/Instructions';
 import Button from '../components/Button';
 import Answers from '../components/Answers';
+import AircraftList from '../components/AircraftList';
+import data from '../util/temp';
 
 export async function getStaticProps() {
   const { client } = await connectToDatabase();
@@ -20,6 +22,7 @@ const Index = ({ isConnected }) => {
   const [start, setStart] = useState(false);
   const [timeAnswer, setTimeAnswer] = useState('');
   const [waiveAnswer, setWaiveAnswer] = useState(false);
+  const [page, setPage] = useState('list');
 
   const onClick = () => {
     console.log('I was clicked');
@@ -31,6 +34,9 @@ const Index = ({ isConnected }) => {
         <title>Wake Turbulence Practice Quiz</title>
       </Head>
 
+      {page === 'list' ? <AircraftList data={data} backButton={setPage} /> : null}
+
+      {/*start quiz page */}
       {start ? <Question /> : <Instructions start={setStart} />}
 
       <Answers start={start} onClick={onClick} />
@@ -82,6 +88,7 @@ const Index = ({ isConnected }) => {
           </table>
         </div>
       </div>
+      {/*end of quiz page*/}
 
       <div className='footer'>
         <a href='#' onClick={() => setStart(false)}>
