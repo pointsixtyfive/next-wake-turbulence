@@ -2,24 +2,24 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connectToDatabase } from '../util/mongodb';
-import data from '../util/temp';
 import Answers from '../components/Answers';
 import AircraftList from '../components/AircraftList';
 import Feedback from '../components/Feedback';
 import Instructions from '../components/Instructions';
-
 import Question from '../components/Question';
 
 export async function getStaticProps() {
-  const { client } = await connectToDatabase();
+  const { client, db } = await connectToDatabase();
   const isConnected = await client.isConnected(); // Returns true or false
 
+  const data = await db.collection('aircraft').find().project({ _id: 0 }).toArray();
+
   return {
-    props: { isConnected },
+    props: { isConnected, data },
   };
 }
 
-const Index = ({ isConnected }) => {
+const Index = ({ isConnected, data }) => {
   const [start, setStart] = useState(false);
   const [timeAnswer, setTimeAnswer] = useState('');
   const [waiveAnswer, setWaiveAnswer] = useState(false);
@@ -51,11 +51,11 @@ const Index = ({ isConnected }) => {
       {showFeedback && <Feedback />}
       {/*end of quiz page*/}
 
-      <div className='footer'>
+      <footer className='footer'>
         <a href='#' onClick={() => setStart(false)}>
           Go back to the instructions.
         </a>
-      </div>
+      </footer>
 
       {isConnected ? (
         <h2 className='subtitle'>You are connected to MongoDB</h2>
@@ -72,4 +72,5 @@ export default Index;
 
 Index.propTypes = {
   isConnected: PropTypes.bool,
+  data: PropTypes.array.isRequired,
 };
