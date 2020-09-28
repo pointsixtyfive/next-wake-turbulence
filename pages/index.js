@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connectToDatabase } from '../util/mongodb';
 import Question from '../components/Question';
@@ -6,9 +7,8 @@ import Instructions from '../components/Instructions';
 import Button from '../components/Button';
 import Answers from '../components/Answers';
 
-export async function getServerSideProps(context) {
+export async function getStaticProps() {
   const { client } = await connectToDatabase();
-
   const isConnected = await client.isConnected(); // Returns true or false
 
   return {
@@ -27,6 +27,10 @@ const Index = ({ isConnected }) => {
 
   return (
     <main>
+      <Head>
+        <title>Wake Turbulence Practice Quiz</title>
+      </Head>
+
       {start ? <Question /> : <Instructions start={setStart} />}
 
       <Answers start={start} onClick={onClick} />
@@ -97,3 +101,7 @@ const Index = ({ isConnected }) => {
 };
 
 export default Index;
+
+Index.propTypes = {
+  isConnected: PropTypes.bool,
+};

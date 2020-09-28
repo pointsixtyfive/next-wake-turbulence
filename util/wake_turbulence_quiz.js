@@ -1,10 +1,10 @@
 'use strict';
 
-// ****Aircraft array****
 const AIRCRAFT = [
   { name: 'A300', category: 3, weightClass: 'Heavy', weightScore: 5, intersection: false },
   { name: 'A320', category: 3, weightClass: 'Large', weightScore: 3, intersection: false },
   { name: 'A340', category: 3, weightClass: 'Heavy', weightScore: 5, intersection: false },
+  { name: 'A400', category: 3, weightClass: 'Super', weightScore: 6, intersection: false },
   { name: 'AC68', category: 1, weightClass: 'Small', weightScore: 1, intersection: true },
   { name: 'B727', category: 3, weightClass: 'Large', weightScore: 3, intersection: false },
   { name: 'B737', category: 3, weightClass: 'Large', weightScore: 3, intersection: false },
@@ -45,53 +45,78 @@ const AIRCRAFT = [
   { name: 'SR22', category: 1, weightClass: 'Small', weightScore: 1, intersection: true },
 ];
 
-//Get a question (user initiated)
-function getQuestion() {
-  getAircraft();
-  getDeparturePoint();
-}
+const random = (min = 1, max = 100) => Math.floor(Math.random() * max + min);
 
 //Pull two random aircraft from the array
-let aircraftInUse;
+const getAircraft = () => {
+  const data = [];
 
-function getAircraft() {
-  let lead = AIRCRAFT[Math.floor(Math.random() * AIRCRAFT.length)];
-  let trail = AIRCRAFT[Math.floor(Math.random() * AIRCRAFT.length)];
-  aircraftInUse = [lead, trail];
+  for (let i = 0; i < 2; i++) {
+    data.push(AIRCRAFT[random(0, AIRCRAFT.length)]);
+  }
 
-  return aircraftInUse;
-}
-getAircraft(); //line used for debugging
+  return data;
+};
+
+const [lead, trail] = getAircraft();
 
 //Set the departure positions for each aircraft
 //Randomly select departure position based on if the aircraft can accept an intersection
-let departurePoint = [];
-function getDeparturePoint() {
-  aircraftInUse.map((index) => {
-    let random = Math.floor(Math.random() * 3);
-    if (index.intersection === true && random > 0) {
-      return departurePoint.push('Intersection');
+function getDeparturePoint(arr) {
+  return arr.map((aircraft) => {
+    let num = random();
+
+    if (aircraft.intersection === true && num > 30) {
+      return 'Intersection';
     } else {
-      return departurePoint.push('Full length');
+      return 'Full length';
     }
   });
 }
-getDeparturePoint(); //Line used for debugging
 
-//Randomly assign departure from an intersecting runway
-function assignIntersectingRwy() {
-  //stuff
+const [leadDepPoint, trailDepPoint] = getDeparturePoint([lead, trail]);
+
+//Randomly assign departure from an intersecting runway or opposide direction. use -1 to disable crossing or odo.
+//need to work on this to allow for disabling either situation. for now just use defaults.
+function assignRwy(odoChance = 10, crossingChance = 30) {
+  let num = random();
+
+  if (odoChance > 0 && num >= 100 - odoChance) return 'opposite';
+  if (crossingChance > 0 && num >= 65) return 'cossing';
+  return '';
 }
 
-//Compare the characteristics to see if there is any wake turbulence requirement
-let leadWake = aircraftInUse[0].weightScore;
-let trailWake = aircraftInUse[1].weightScore;
-let leadDepPoint = departurePoint[0];
-let trailDepPoint = departurePoint[1];
+const questionData = { lead, trail };
+questionData.lead.departurePoint = leadDepPoint;
+questionData.trail.departurePoint = trailDepPoint;
+questionData.lead.runway = assignRwy();
+questionData.trail.runway = (() => (questionData.lead.runway !== '' ? '' : assignRwy()))();
 
-let noWake = leadWake < trailWake ? true : false; // need to redo this to account for small to small etc.
-let wakeTime;
-let waiveable = leadWake >= 5 ? false : true;
+//Compare the characteristics to see if there is any wake turbulence requirement
+const leadWake = lead.weightScore;
+const trailWake = trail.weightScore;
+
+const isWake = (lead, trail) => {
+  if (lead < 5 && lead === trail) {
+    return false;
+  }
+
+  if (lead < trail) {
+    return false;
+  }
+
+  return true;
+};
+
+const wake = isWake(leadWake, trailWake);
+
+const isWaivable = () => {
+  if (!wake) {
+    return false;
+  }
+
+  return leadWake >= 4 ? false : true;
+};
 
 //NOTE TO DELETE LATER. super not incorporated into check, anything behind it is +1 min. a
 function calculateWake() {
@@ -107,18 +132,15 @@ function calculateWake() {
   }
 }
 
-if (noWake === true) {
-  wakeTime = 'None';
-  waiveable = 'N/A';
-} else {
-  calculateWake();
-}
+const getAnswer = () => {
+  if (!wake) {
+    return { wakeTime: 'None', waiveable: 'N/A' };
+  } else {
+    calculateWake();
+  }
+};
 
-console.log(aircraftInUse, departurePoint, noWake, wakeTime, waiveable);
-//Return information for insertion into HTML
+const answer = getAnswer();
+questionData.answer = answer;
 
-//Get user input
-
-//Check user answers
-
-//Return feedback
+console.log(questionData);

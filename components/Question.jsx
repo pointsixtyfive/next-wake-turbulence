@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Question = () => {
   return (
@@ -9,3 +10,5 @@ const Question = () => {
 };
 
 export default Question;
+
+Question.PropTypes = {};
