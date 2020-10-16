@@ -48,7 +48,7 @@ const Index = ({ isConnected, data }) => {
         <input type='reset' className='big' />
       </form>
 
-      {showFeedback && <Feedback />}
+      {showFeedback && <Feedback data={{}} />}
       {/*end of quiz page*/}
 
       <footer className='footer'>

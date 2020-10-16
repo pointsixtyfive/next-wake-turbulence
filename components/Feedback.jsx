@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Feedback = () => {
+const Feedback = ({ data }) => {
   return <section id='feedback'></section>;
 };
 
 export default Feedback;
 
-Feedback.propTypes = {};
+Feedback.propTypes = {
+  data: PropTypes.object.isRequired,
+};
