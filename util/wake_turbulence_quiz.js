@@ -76,13 +76,13 @@ function getDeparturePoint(arr) {
 
 const [leadDepPoint, trailDepPoint] = getDeparturePoint([lead, trail]);
 
-//Randomly assign departure from an intersecting runway or opposide direction. use -1 to disable crossing or odo.
+//Randomly assign departure from an intersecting runway or opposite direction. use -1 to disable crossing or odo.
 //need to work on this to allow for disabling either situation. for now just use defaults.
 function assignRwy(odoChance = 10, crossingChance = 30) {
   let num = random();
 
   if (odoChance > 0 && num >= 100 - odoChance) return 'opposite';
-  if (crossingChance > 0 && num >= 65) return 'cossing';
+  if (crossingChance > 0 && num >= 65) return 'crossing';
   return '';
 }
 
