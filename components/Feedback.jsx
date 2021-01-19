@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 const Feedback = ({ questionData }) => {
   const { answer, lead, trail } = questionData;
 
-  return (
+  return !answer ? null : (
     <section id='feedback'>
       <p>
         {`The correct answer is ${answer.wakeTime} minutes.`}

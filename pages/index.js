@@ -24,7 +24,7 @@ export async function getStaticProps() {
 const Index = ({ isConnected, data }) => {
   const [start, setStart] = useState(false);
   const [page, setPage] = useState('list');
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(true);
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
 
@@ -49,8 +49,6 @@ const Index = ({ isConnected, data }) => {
       {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
 
       <Answers start={start} onClick={handleClick} />
-
-      <Button label={'None'} value={0} onClick={(e) => handleClick(e)} disabled={!start} />
 
       <section id='controls'>
         <Button label={'Submit'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
