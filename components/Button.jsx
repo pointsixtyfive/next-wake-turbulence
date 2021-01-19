@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ label, onClick, value, disabled }) => {
+const Button = ({ label, onClick, value, disabled, className }) => {
   return (
-    <button type='button' value={value} onClick={onClick} disabled={disabled}>
+    <button type='button' className={className} value={value} onClick={onClick} disabled={disabled}>
       {label}
     </button>
   );
@@ -15,4 +15,5 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]).isRequired,
   disabled: PropTypes.bool.isRequired,
+  className: PropTypes.string,
 };

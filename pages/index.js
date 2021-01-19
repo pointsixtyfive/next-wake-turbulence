@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connectToDatabase } from '../util/mongodb';
@@ -7,6 +7,8 @@ import AircraftList from '../components/AircraftList';
 import Feedback from '../components/Feedback';
 import Instructions from '../components/Instructions';
 import Question from '../components/Question';
+import Button from '../components/Button';
+import generateQuestion from '../util/wake_turbulence_quiz';
 
 export async function getStaticProps() {
   const { client, db } = await connectToDatabase();
@@ -25,9 +27,16 @@ const Index = ({ isConnected, data }) => {
   const [waiveAnswer, setWaiveAnswer] = useState(false);
   const [page, setPage] = useState('list');
   const [showFeedback, setShowFeedback] = useState(false);
+  const [questionData, setQuestionData] = useState({});
+  const [nextQuestion, setNextQuestion] = useState(1);
 
-  const handleClick = () => {
-    console.log('I was clicked');
+  useEffect(() => {
+    let q = generateQuestion();
+    setQuestionData(q);
+  }, [nextQuestion]);
+
+  const handleClick = (e) => {
+    console.log(e.target.value);
   };
 
   return (
@@ -39,14 +48,23 @@ const Index = ({ isConnected, data }) => {
       {page === 'list' ? <AircraftList data={data} backButton={setPage} /> : null}
 
       {/*start quiz page */}
-      {start ? <Question /> : <Instructions start={setStart} />}
+      {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
 
       <Answers start={start} onClick={handleClick} />
 
-      <form action='' method='post' name='answer'>
-        <input type='submit' className='big' />
-        <input type='reset' className='big' />
-      </form>
+      <Button label={'None'} value={0} onClick={(e) => handleClick(e)} disabled={!start} />
+
+      <section id='controls'>
+        <Button label={'Submit'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
+        <Button label={'Reset'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
+        <Button
+          label={'Next'}
+          value={0}
+          onClick={() => setNextQuestion(nextQuestion + 1)}
+          disabled={!start}
+          className={'big'}
+        />
+      </section>
 
       {showFeedback && <Feedback data={{}} />}
       {/*end of quiz page*/}
