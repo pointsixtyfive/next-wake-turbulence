@@ -11,20 +11,19 @@ import Button from '../components/Button';
 import generateQuestion from '../util/wake_turbulence_quiz';
 
 export async function getStaticProps() {
-  const { client, db } = await connectToDatabase();
-  const isConnected = await client.isConnected(); // Returns true or false
+  const { db } = await connectToDatabase();
 
   const data = await db.collection('aircraft').find().project({ _id: 0 }).toArray();
 
   return {
-    props: { isConnected, data },
+    props: { data },
   };
 }
 
-const Index = ({ isConnected, data }) => {
+const Index = ({ data }) => {
   const [start, setStart] = useState(false);
-  const [page, setPage] = useState('list');
-  const [showFeedback, setShowFeedback] = useState(true);
+  const [page, setPage] = useState('quiz');
+  const [showFeedback, setShowFeedback] = useState(false);
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
 
@@ -70,14 +69,6 @@ const Index = ({ isConnected, data }) => {
           Go back to the instructions.
         </a>
       </footer>
-
-      {isConnected ? (
-        <h2 className='subtitle'>You are connected to MongoDB</h2>
-      ) : (
-        <h2 className='subtitle'>
-          You are NOT connected to MongoDB. Check the <code>README.md</code> for instructions.
-        </h2>
-      )}
     </main>
   );
 };
@@ -85,6 +76,5 @@ const Index = ({ isConnected, data }) => {
 export default Index;
 
 Index.propTypes = {
-  isConnected: PropTypes.bool,
   data: PropTypes.array.isRequired,
 };
