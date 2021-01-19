@@ -28,9 +28,9 @@ const Index = ({ data }) => {
   const [nextQuestion, setNextQuestion] = useState(1);
 
   useEffect(() => {
-    let q = generateQuestion();
+    let q = generateQuestion(data);
     setQuestionData(q);
-  }, [nextQuestion]);
+  }, [nextQuestion, data]);
 
   const handleClick = (e) => {
     console.log(e.target.value);
