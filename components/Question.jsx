@@ -6,6 +6,7 @@ const Question = ({ questionData }) => {
     Intersection: 'an intersection',
     'Full length': 'the full length',
     crossing: 'a crossing runway',
+    opposite: 'opposite direction',
   };
 
   function depPoint(ac) {

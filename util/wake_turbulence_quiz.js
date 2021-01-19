@@ -79,7 +79,7 @@ function generateQuestion(aircraftList) {
   function calculateWake() {
     const answer = {
       wakeTime: undefined,
-      waiveable: undefined,
+      waiveable: isWaivable(),
     };
 
     if (

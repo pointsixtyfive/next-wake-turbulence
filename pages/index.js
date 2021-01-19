@@ -42,6 +42,7 @@ const Index = ({ data }) => {
         <title>Wake Turbulence Practice Quiz</title>
       </Head>
 
+      {/* Displays the list of aircraft being used to generate questions for user to reference. */}
       {page === 'list' ? <AircraftList data={data} backButton={setPage} /> : null}
 
       {/*start quiz page */}
