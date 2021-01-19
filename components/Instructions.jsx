@@ -5,7 +5,7 @@ const Instructions = ({ start }) => {
   return (
     <div>
       <p>Here are the instructions</p>
-      <Button label={'Start'} onClick={(e) => start(e.target.value)} value={true} />
+      <Button label={'Start'} onClick={() => start(true)} value={true} disabled={false} />
     </div>
   );
 };

@@ -23,8 +23,6 @@ export async function getStaticProps() {
 
 const Index = ({ isConnected, data }) => {
   const [start, setStart] = useState(false);
-  const [timeAnswer, setTimeAnswer] = useState('');
-  const [waiveAnswer, setWaiveAnswer] = useState(false);
   const [page, setPage] = useState('list');
   const [showFeedback, setShowFeedback] = useState(false);
   const [questionData, setQuestionData] = useState({});
@@ -66,7 +64,7 @@ const Index = ({ isConnected, data }) => {
         />
       </section>
 
-      {showFeedback && <Feedback data={{}} />}
+      {showFeedback && <Feedback questionData={questionData} />}
       {/*end of quiz page*/}
 
       <footer className='footer'>
