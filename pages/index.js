@@ -26,6 +26,7 @@ const Index = ({ data }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
+  const [answer, setAnswer] = useState({ time: 0, waive: 'N/A' });
 
   useEffect(() => {
     let q = generateQuestion(data);
@@ -33,8 +34,22 @@ const Index = ({ data }) => {
   }, [nextQuestion, data]);
 
   const handleClick = (e) => {
-    console.log(e.target.value);
+    const tempAnswer = Object.assign({}, answer);
+
+    if (e.target.id == 'waive') {
+      tempAnswer.waive == 'N/A'
+        ? (tempAnswer.waive = true)
+        : tempAnswer.waive == true
+        ? (tempAnswer.waive = false)
+        : (tempAnswer.waive = 'N/A');
+    } else {
+      tempAnswer.time = e.target.value;
+    }
+
+    setAnswer(tempAnswer);
   };
+
+  const checkAnswer = () => {};
 
   return (
     <main>
@@ -48,10 +63,10 @@ const Index = ({ data }) => {
       {/*start quiz page */}
       {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
 
-      <Answers start={start} onClick={handleClick} />
+      <Answers start={start} onClick={handleClick} answer={answer} />
 
       <section id='controls'>
-        <Button label={'Submit'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
+        <Button label={'Submit'} value={0} onClick={(e) => checkAnswer(e)} disabled={!start} className={'big'} />
         <Button label={'Reset'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
         <Button
           label={'Next'}

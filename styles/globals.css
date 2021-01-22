@@ -77,6 +77,11 @@ button#back {
   margin: 1em 2em;
 }
 
+button.active {
+  background-color: #1d34ff;
+  color: #ffffff;
+}
+
 #aircraft-list .flex_container {
   max-width: fit-content;
   border: 1px solid black;
