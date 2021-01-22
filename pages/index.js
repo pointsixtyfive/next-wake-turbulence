@@ -26,7 +26,7 @@ const Index = ({ data }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
-  const [answer, setAnswer] = useState({ time: 0, waive: 'N/A' });
+  const [answer, setAnswer] = useState({ wakeTime: 'None', waiveable: 'N/A' });
 
   useEffect(() => {
     let q = generateQuestion(data);
@@ -37,19 +37,31 @@ const Index = ({ data }) => {
     const tempAnswer = Object.assign({}, answer);
 
     if (e.target.id == 'waive') {
-      tempAnswer.waive == 'N/A'
-        ? (tempAnswer.waive = true)
-        : tempAnswer.waive == true
-        ? (tempAnswer.waive = false)
-        : (tempAnswer.waive = 'N/A');
+      tempAnswer.waiveable == 'N/A'
+        ? (tempAnswer.waiveable = true)
+        : tempAnswer.waiveable == true
+        ? (tempAnswer.waiveable = false)
+        : (tempAnswer.waiveable = 'N/A');
     } else {
-      tempAnswer.time = e.target.value;
+      tempAnswer.wakeTime = e.target.value;
     }
 
     setAnswer(tempAnswer);
   };
 
-  const checkAnswer = () => {};
+  const checkAnswer = () => {
+    console.log('Q: ', questionData, 'A: ', answer);
+    const q = questionData.answer;
+
+    for (let key in q) {
+      if (q[key] !== answer[key]) {
+        console.log('Wrong');
+        return 'Wrong answer.';
+      }
+    }
+    console.log('Correct');
+    return 'Correct';
+  };
 
   return (
     <main>

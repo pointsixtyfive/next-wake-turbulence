@@ -9,7 +9,14 @@ const Answers = ({ answer, start, onClick }) => {
 
   return (
     <section id='answer'>
-      <Button id='none' label={'None'} value={0} onClick={(e) => onClick(e)} className={'none'} disabled={!start} />
+      <Button
+        id='none'
+        label={'None'}
+        value={'None'}
+        onClick={(e) => onClick(e)}
+        className={'none'}
+        disabled={!start}
+      />
       <Button id='two' label={'2 Minutes'} value={2} onClick={(e) => onClick(e)} className={'none'} disabled={!start} />
       <Button
         id='three'
@@ -37,8 +44,8 @@ const Answers = ({ answer, start, onClick }) => {
       />
 
       <div id='user-answer'>
-        Your answer: {answer.time == 0 ? 'Not applicable' : `${answer.time} minutes`}{' '}
-        {answer.waive === true ? ', Waivable' : !answer.waive ? ', Not waivable' : 'Not applicable'}
+        Your answer: {answer.wakeTime == 0 ? 'Not applicable' : `${answer.wakeTime} minutes`}{' '}
+        {answer.waiveable === true ? ', Waivable' : !answer.waiveable ? ', Not waivable' : 'Not applicable'}
       </div>
     </section>
   );
