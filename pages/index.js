@@ -9,6 +9,8 @@ import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
 import generateQuestion from '../util/wake_turbulence_quiz';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export async function getStaticProps() {
   const { db } = await connectToDatabase();
@@ -19,6 +21,8 @@ export async function getStaticProps() {
     props: { data },
   };
 }
+
+toast.configure();
 
 const Index = ({ data }) => {
   const [start, setStart] = useState(false);
@@ -31,6 +35,7 @@ const Index = ({ data }) => {
   useEffect(() => {
     let q = generateQuestion(data);
     setQuestionData(q);
+    clearAnswer();
   }, [nextQuestion, data]);
 
   const handleClick = (e) => {
@@ -54,13 +59,40 @@ const Index = ({ data }) => {
     const q = questionData.answer;
 
     for (let key in q) {
-      if (q[key] !== answer[key]) {
-        console.log('Wrong');
-        return 'Wrong answer.';
+      if (q[key] != answer[key]) {
+        //wrong answer
+        answerNotification(false);
+        return 'wrong answer';
       }
     }
-    console.log('Correct');
-    return 'Correct';
+    //correct answer
+    answerNotification(true);
+    return 'correct';
+  };
+
+  const clearAnswer = () => {
+    setAnswer({ wakeTime: 'None', waiveable: 'N/A' });
+  };
+
+  const answerNotification = (correct) => {
+    const toastOptions = {
+      position: 'bottom-center',
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      toastId: 'toaaast',
+    };
+
+    const words = ['Correct', 'Yup!', 'That is correct.', 'Right on', '+1', 'Nailed it', 'Beast mode'];
+    const random = Math.floor(Math.random() + words.length);
+    if (correct) {
+      toast.success(`Correct`, toastOptions);
+    } else {
+      toast.error('You suck', toastOptions);
+    }
   };
 
   return (
@@ -78,8 +110,8 @@ const Index = ({ data }) => {
       <Answers start={start} onClick={handleClick} answer={answer} />
 
       <section id='controls'>
-        <Button label={'Submit'} value={0} onClick={(e) => checkAnswer(e)} disabled={!start} className={'big'} />
-        <Button label={'Reset'} value={0} onClick={(e) => handleClick(e)} disabled={!start} className={'big'} />
+        <Button label={'Submit'} value={0} onClick={() => checkAnswer()} disabled={!start} className={'big'} />
+        <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} />
         <Button
           label={'Next'}
           value={0}
