@@ -62,7 +62,6 @@ const Index = ({ data }) => {
   };
 
   const checkAnswer = () => {
-    console.log('Q: ', questionData, 'A: ', answer);
     const q = questionData.answer;
 
     for (let key in q) {

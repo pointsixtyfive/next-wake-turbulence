@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const Answers = ({ answer, start, onClick }) => {
-  useEffect(() => {
-    console.log('useEffect ', answer);
-  }, [answer]);
+  useEffect(() => {}, [answer]);
 
   return (
     <section id='answer'>
