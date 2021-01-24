@@ -10,6 +10,9 @@ import Button from '../components/Button';
 import generateQuestion from '../util/wake_turbulence_quiz';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faChevronCircleRight, faCopyright } from '@fortawesome/free-solid-svg-icons';
+import IconNav from '../components/iconNav';
 
 export async function getStaticProps() {
   const { db } = await connectToDatabase();
@@ -102,35 +105,45 @@ const Index = ({ data }) => {
   return (
     <main>
       <Head>
-        <title>Wake Turbulence Practice Quiz</title>
+        <title>Wake Turbulence Practice Questions</title>
       </Head>
 
       {/* Displays the list of aircraft being used to generate questions for user to reference. */}
-      {page === 'list' ? <AircraftList data={data} backButton={setPage} /> : null}
+      {page === 'list' ? (
+        <AircraftList data={data} backButton={setPage} />
+      ) : (
+        <div>
+          <div className='icon-nav-container'>
+            <IconNav setStart={setStart} setPage={setPage} />
+          </div>
+          {/*start quiz page */}
+          {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
+          <Answers start={start} onClick={handleClick} answer={answer} />
 
-      {/*start quiz page */}
-      {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
-
-      <Answers start={start} onClick={handleClick} answer={answer} />
-
-      <section id='controls'>
-        <Button label={'Check'} value={0} onClick={() => checkAnswer()} disabled={!start} className={''} />
-        {/* <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} /> */}
-        <Button
-          label={'Next'}
-          value={0}
-          onClick={() => setNextQuestion(nextQuestion + 1)}
-          disabled={!start}
-          className={''}
-        />
-      </section>
-
+          <section id='controls'>
+            <Button
+              label={<FontAwesomeIcon icon={faCheckCircle} className='color-green' />}
+              value={0}
+              onClick={() => checkAnswer()}
+              disabled={!start}
+              className={''}
+            />
+            {/* <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} /> */}
+            <Button
+              label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
+              value={0}
+              onClick={() => setNextQuestion(nextQuestion + 1)}
+              disabled={!start}
+              className={''}
+            />
+          </section>
+        </div>
+      )}
       {/*end of quiz page*/}
-
       <footer className='footer'>
-        <a href='#' onClick={() => setStart(false)}>
-          Go back to the instructions.
-        </a>
+        <span>
+          <FontAwesomeIcon icon={faCopyright} className='color-white' /> pointSixtyfive.com
+        </span>
       </footer>
     </main>
   );

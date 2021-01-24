@@ -3,7 +3,7 @@ import Aircraft from './Aircraft';
 
 const AircraftList = ({ data, backButton }) => {
   return (
-    <section id='aircraft-list'>
+    <section id='aircraft-list' className='color-white'>
       <h2>List of Aircraft</h2>
       <div className='flex_container'>
         {data.map((aircraft) => (
