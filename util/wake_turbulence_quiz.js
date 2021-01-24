@@ -23,9 +23,9 @@ function generateQuestion(aircraftList) {
       let num = random();
 
       if (aircraft.intersection === true && num > 30) {
-        return 'Intersection';
+        return 'intersection';
       } else {
-        return 'Full length';
+        return 'full length';
       }
     });
   }
@@ -74,8 +74,6 @@ function generateQuestion(aircraftList) {
     return leadWake >= 4 ? false : true;
   };
 
-  //NOTE TO DELETE LATER. super not incorporated into check, anything behind it is +1 min. a
-
   function calculateWake() {
     const answer = {
       wakeTime: undefined,
@@ -87,12 +85,28 @@ function generateQuestion(aircraftList) {
       (leadWake === 4 && trailWake <= 2 && leadDepPoint === trailDepPoint)
     ) {
       answer.wakeTime = 2;
+
+      //add one minute if lead is a super
+      if (leadWake === 6) {
+        answer.wakeTime++;
+      }
+
       return answer;
-    } else if (leadWake > trailWake && leadDepPoint === 'Full length' && trailDepPoint === 'Intersection') {
+    } else if (leadWake > trailWake && leadDepPoint === 'full length' && trailDepPoint === 'intersection') {
       answer.wakeTime = 3;
+
+      if (leadWake === 6) {
+        answer.wakeTime++;
+      }
+
       return answer;
+    } else if (leadWake === 2 && trailWake === 1 && leadDepPoint !== trailDepPoint) {
+      if (trailDepPoint === 'intersection' || leadDepPoint === 'opposite') {
+        answer.wakeTime = 3;
+      }
     } else {
       console.error('something is wrong with the wake turbulence comparison');
+      alert('There was an error:', questionData);
     }
 
     return answer;
@@ -109,7 +123,6 @@ function generateQuestion(aircraftList) {
   const answer = getAnswer();
   questionData.answer = answer;
 
-  console.log(questionData);
   return questionData;
 }
 

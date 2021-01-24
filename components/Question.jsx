@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 const Question = ({ questionData }) => {
   const { trail, lead } = questionData;
   const labels = {
-    Intersection: 'an intersection',
-    'Full length': 'the full length',
+    intersection: 'an intersection',
+    'full length': 'the full length',
     crossing: 'a crossing runway',
     opposite: 'opposite direction',
   };
