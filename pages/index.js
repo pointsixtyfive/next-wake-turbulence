@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { connectToDatabase } from '../util/mongodb';
 import Answers from '../components/Answers';
 import AircraftList from '../components/AircraftList';
-import Feedback from '../components/Feedback';
 import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
@@ -27,7 +26,6 @@ toast.configure();
 const Index = ({ data }) => {
   const [start, setStart] = useState(false);
   const [page, setPage] = useState('quiz');
-  const [showFeedback, setShowFeedback] = useState(false);
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
   const [answer, setAnswer] = useState({ wakeTime: 'None', waiveable: 'N/A' });
@@ -110,7 +108,7 @@ const Index = ({ data }) => {
       <Answers start={start} onClick={handleClick} answer={answer} />
 
       <section id='controls'>
-        <Button label={'Submit'} value={0} onClick={() => checkAnswer()} disabled={!start} className={'big'} />
+        <Button label={'Check'} value={0} onClick={() => checkAnswer()} disabled={!start} className={'big'} />
         <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} />
         <Button
           label={'Next'}
@@ -121,7 +119,6 @@ const Index = ({ data }) => {
         />
       </section>
 
-      {showFeedback && <Feedback questionData={questionData} />}
       {/*end of quiz page*/}
 
       <footer className='footer'>
