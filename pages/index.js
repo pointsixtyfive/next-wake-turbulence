@@ -38,15 +38,21 @@ const Index = ({ data }) => {
 
   const handleClick = (e) => {
     const tempAnswer = Object.assign({}, answer);
-
-    if (e.target.id == 'waive') {
-      tempAnswer.waiveable == 'N/A'
-        ? (tempAnswer.waiveable = true)
-        : tempAnswer.waiveable == true
-        ? (tempAnswer.waiveable = false)
-        : (tempAnswer.waiveable = 'N/A');
-    } else {
-      tempAnswer.wakeTime = e.target.value;
+    const button = e.target.id;
+    switch (button) {
+      case 'none':
+        tempAnswer.waiveable = 'N/A';
+        tempAnswer.wakeTime = 'None';
+        break;
+      case 'waive':
+        tempAnswer.waiveable = true;
+        break;
+      case 'nowaive':
+        tempAnswer.waiveable = false;
+        break;
+      default:
+        tempAnswer.wakeTime = e.target.value;
+        break;
     }
 
     setAnswer(tempAnswer);

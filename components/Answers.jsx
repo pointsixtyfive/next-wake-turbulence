@@ -13,7 +13,7 @@ const Answers = ({ answer, start, onClick }) => {
         <span>Wake Time: </span>
         <span>{answer.wakeTime == 'None' ? 'Not applicable' : `${answer.wakeTime} minutes`}</span>
         <span>Waivable: </span>
-        <span>{answer.waiveable === true ? ', Yes' : !answer.waiveable ? ', No' : 'Not applicable'}</span>
+        <span>{answer.waiveable === true ? 'Yes' : !answer.waiveable ? 'No' : 'Not applicable'}</span>
       </div>
       <div>
         <Button
