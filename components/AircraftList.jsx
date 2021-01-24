@@ -10,7 +10,7 @@ const AircraftList = ({ data, backButton }) => {
           <Aircraft key={aircraft.name} data={aircraft} />
         ))}
       </div>
-      <button id='back' onClick={() => backButton('quiz')}>
+      <button id='back' className='button' onClick={() => backButton('quiz')}>
         Back to quiz
       </button>
     </section>

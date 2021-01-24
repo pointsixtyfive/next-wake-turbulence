@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connectToDatabase } from '../util/mongodb';
@@ -8,7 +8,7 @@ import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
 import generateQuestion from '../util/wake_turbulence_quiz';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faChevronCircleRight, faCopyright } from '@fortawesome/free-solid-svg-icons';
@@ -81,6 +81,7 @@ const Index = ({ data }) => {
     setAnswer({ wakeTime: 'None', waiveable: 'N/A' });
   };
 
+  const toastId = useRef(null);
   const answerNotification = (correct) => {
     const toastOptions = {
       position: 'bottom-center',
@@ -90,15 +91,16 @@ const Index = ({ data }) => {
       pauseOnHover: false,
       draggable: false,
       progress: undefined,
-      toastId: 'toaaast',
     };
 
-    const words = ['Correct', 'Yup!', 'That is correct.', 'Right on', '+1', 'Nailed it', 'Beast mode'];
-    const random = Math.floor(Math.random() + words.length);
     if (correct) {
-      toast.success(`Correct`, toastOptions);
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.success(`Correct`, toastOptions);
+      }
     } else {
-      toast.error('You suck', toastOptions);
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('Incorrect', toastOptions);
+      }
     }
   };
 
