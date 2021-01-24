@@ -114,14 +114,14 @@ const Index = ({ data }) => {
       <Answers start={start} onClick={handleClick} answer={answer} />
 
       <section id='controls'>
-        <Button label={'Check'} value={0} onClick={() => checkAnswer()} disabled={!start} className={'big'} />
-        <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} />
+        <Button label={'Check'} value={0} onClick={() => checkAnswer()} disabled={!start} className={''} />
+        {/* <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} /> */}
         <Button
           label={'Next'}
           value={0}
           onClick={() => setNextQuestion(nextQuestion + 1)}
           disabled={!start}
-          className={'big'}
+          className={''}
         />
       </section>
 
