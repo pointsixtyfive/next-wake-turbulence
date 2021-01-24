@@ -7,12 +7,12 @@ import AircraftList from '../components/AircraftList';
 import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
+import IconNav from '../components/IconNav';
 import generateQuestion from '../util/wake_turbulence_quiz';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faChevronCircleRight, faCopyright } from '@fortawesome/free-solid-svg-icons';
-import IconNav from '../components/iconNav';
 
 export async function getStaticProps() {
   const { db } = await connectToDatabase();
