@@ -80,9 +80,12 @@ function generateQuestion(aircraftList) {
       waiveable: isWaivable(),
     };
 
+    const odo = leadDepPoint === 'opposite' || trailDepPoint === 'opposite';
+
     if (
       (leadWake === 5 && trailWake <= 5 && leadDepPoint === trailDepPoint) ||
-      (leadWake === 4 && trailWake <= 2 && leadDepPoint === trailDepPoint)
+      (leadWake === 4 && trailWake <= 2 && leadDepPoint === trailDepPoint) ||
+      (leadWake === 6 && trailWake === 5)
     ) {
       answer.wakeTime = 2;
 
@@ -92,8 +95,10 @@ function generateQuestion(aircraftList) {
       }
 
       return answer;
-    } else if (leadWake > trailWake && leadDepPoint === 'full length' && trailDepPoint === 'intersection') {
-      answer.wakeTime = 3;
+    } else if (leadWake > trailWake) {
+      if ((leadDepPoint === 'full length' && trailDepPoint === 'intersection') || odo) {
+        answer.wakeTime = 3;
+      }
 
       if (leadWake === 6) {
         answer.wakeTime++;
@@ -101,7 +106,7 @@ function generateQuestion(aircraftList) {
 
       return answer;
     } else if (leadWake === 2 && trailWake === 1 && leadDepPoint !== trailDepPoint) {
-      if (trailDepPoint === 'intersection' || leadDepPoint === 'opposite') {
+      if (trailDepPoint === 'intersection' || odo) {
         answer.wakeTime = 3;
       }
     } else {
