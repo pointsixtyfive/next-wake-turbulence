@@ -13,7 +13,7 @@ const Question = ({ questionData }) => {
 
   function depPoint(ac) {
     if (ac.runway) {
-      return labels.crossing;
+      return labels[ac.runway];
     }
     return labels[ac.departurePoint];
   }

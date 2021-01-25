@@ -108,15 +108,14 @@ const Index = ({ data }) => {
       <Head>
         <title>Wake Turbulence Practice Questions</title>
       </Head>
-
+      <div className='icon-nav-container'>
+        <IconNav page={page} setStart={setStart} setPage={setPage} />
+      </div>
       {/* Displays the list of aircraft being used to generate questions for user to reference. */}
       {page === 'list' ? (
         <AircraftList data={data} backButton={setPage} />
       ) : (
         <div>
-          <div className='icon-nav-container'>
-            <IconNav setStart={setStart} setPage={setPage} />
-          </div>
           {/*start quiz page */}
           {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
           <Answers start={start} onClick={handleClick} answer={answer} />
@@ -142,9 +141,7 @@ const Index = ({ data }) => {
       )}
       {/*end of quiz page*/}
       <footer className='footer'>
-        <span>
-          <FontAwesomeIcon icon={faCopyright} className='color-white' /> pointSixtyfive.com
-        </span>
+        <img src='/circle-logo.svg' alt='pointsixtyfive logo' /> <span className='color-white'>pointSixtyfive</span>
       </footer>
     </main>
   );
