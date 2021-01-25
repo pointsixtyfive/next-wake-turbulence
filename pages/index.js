@@ -12,7 +12,7 @@ import generateQuestion from '../util/wake_turbulence_quiz';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faChevronCircleRight, faCopyright } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 export async function getStaticProps() {
   const { db } = await connectToDatabase();
