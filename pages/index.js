@@ -122,7 +122,11 @@ const Index = ({ data }) => {
       ) : (
         <div>
           {/*start quiz page */}
-          {start ? <Question questionData={questionData} /> : <Instructions start={setStart} />}
+          {start ? (
+            <Question questionData={questionData} />
+          ) : (
+            <Instructions start={setStart} options={options} setOptions={setOptions} />
+          )}
           <Answers start={start} onClick={handleClick} answer={answer} />
 
           <section id='controls'>
