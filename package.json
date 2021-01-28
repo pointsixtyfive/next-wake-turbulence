@@ -1,6 +1,6 @@
 {
   "name": "wake-turbulence-quiz",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +14,7 @@
     "next": "^10.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-toastify": "^7.0.1"
+    "react-toastify": "^7.0.2"
   },
   "license": "None",
   "devDependencies": {
