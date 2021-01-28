@@ -105,6 +105,12 @@ input {
   color: #9c9c9c;
 }
 
+.options input[type='number']::-webkit-inner-spin-button,
+.options input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #start {
   width: 100%;
   text-align: center;
