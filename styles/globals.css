@@ -58,6 +58,7 @@ input {
   padding: 0.5rem;
   background-color: #0e0e0e;
   border-radius: 10px;
+  min-height: 350px;
 }
 
 #instructions li {
@@ -67,6 +68,34 @@ input {
   font-weight: normal;
   list-style-type: disc;
   text-align: left;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  margin-bottom: 1em;
+}
+
+.options label {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 25%;
+}
+
+.options input {
+  margin-left: 4px;
+  width: 46px;
+  background-color: black;
+  color: white;
+  border: 1px solid grey;
+  border-radius: 10px;
+  text-align: center;
+  padding: 2px 4px;
+}
+
+.options input:disabled {
+  color: #9c9c9c;
 }
 
 #start {
@@ -340,7 +369,8 @@ ul.ac-list {
     font-size: 1rem;
   }
 
-  #question {
+  #question,
+  #instructions {
     min-height: 0;
   }
 }

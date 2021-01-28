@@ -7,13 +7,11 @@ import { faPlane, faCheckCircle, faChevronCircleRight, faInfoCircle } from '@for
 const Instructions = ({ start, options, setOptions }) => {
   return (
     <section id='instructions'>
-      <p>Qustions are randomly generated. Aircraft positions are as follows: </p>
-      <ul>
-        <li>Full length</li>
-        <li>Intersection on the same runway</li>
-        <li>Opposite direction</li>
-        <li>Crossing runway</li>
-      </ul>
+      <p>
+        Qustions are randomly generated. Use the options below to increase/decrease the rate at which an aircraft is
+        placed at that position. Use 0 to disable that position.
+      </p>
+
       <p>
         Select the wake turbulence time requirement and if that requirement is waivealbe or not. Use the buttons below
         to enter your answer, then check it with the <FontAwesomeIcon icon={faCheckCircle} className='color-green' />{' '}
