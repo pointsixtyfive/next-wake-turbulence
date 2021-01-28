@@ -5,7 +5,7 @@ const AircraftList = ({ data, backButton }) => {
   return (
     <section id='aircraft-list' className='color-white'>
       <h2>List of Aircraft</h2>
-      <div className='flex_container'>
+      <div className='ac-container'>
         {data.map((aircraft) => (
           <Aircraft key={aircraft.name} data={aircraft} />
         ))}

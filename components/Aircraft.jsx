@@ -2,21 +2,21 @@ import PropTypes from 'prop-types';
 
 const Aircraft = ({ data }) => {
   return (
-    <div className='flex_container'>
+    <div className='ac-container'>
       <div className='box name'>
-        <ul>
+        <ul className='ac-list'>
           <li>A/C</li>
           <li>{data.name}</li>
         </ul>
       </div>
       <div className='box category'>
-        <ul>
+        <ul className='ac-list'>
           <li>Category</li>
           <li>{data.category}</li>
         </ul>
       </div>
       <div className='box weight'>
-        <ul>
+        <ul className='ac-list'>
           <li>Category</li>
           <li>{data.weightClass}</li>
         </ul>

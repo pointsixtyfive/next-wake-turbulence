@@ -128,7 +128,6 @@ const Index = ({ data }) => {
               disabled={!start}
               className={''}
             />
-            {/* <Button label={'Clear'} value={0} onClick={() => clearAnswer()} disabled={!start} className={'big'} /> */}
             <Button
               label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
               value={0}
