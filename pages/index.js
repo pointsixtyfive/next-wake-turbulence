@@ -8,7 +8,7 @@ import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
 import IconNav from '../components/IconNav';
-import generateQuestion, { defaultOptions } from '../util/wake_turbulence_quiz';
+import generateQuestion from '../util/wake_turbulence_quiz';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,11 +32,12 @@ const Index = ({ data }) => {
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
   const [answer, setAnswer] = useState({ wakeTime: 'None', waiveable: 'N/A' });
-  const [options, setOptions] = useState({});
-
-  useEffect(() => {
-    setOptions(defaultOptions);
-  }, []);
+  const [options, setOptions] = useState({
+    parallel: 0,
+    opposite: 10,
+    crossing: 15,
+    intersection: 35,
+  });
 
   useEffect(() => {
     let q = generateQuestion(data, options);

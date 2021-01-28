@@ -26,6 +26,50 @@ const Options = ({ options, setOptions }) => {
           }}
         />
       </label>
+      <label htmlFor='Crossing'>
+        Crossing:
+        <input
+          type='number'
+          name='crossing'
+          id='crossing'
+          min='0'
+          max='50'
+          value={options.crossing}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        />
+      </label>
+      <label htmlFor='opposite'>
+        Opposite:
+        <input
+          type='number'
+          name='opposite'
+          id='opposite'
+          min='0'
+          max='50'
+          value={options.opposite}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        />
+      </label>
+      {/* Not implemented yet */}
+      <label htmlFor='Parallel'>
+        Parallel:
+        <input
+          type='number'
+          name='Parallel'
+          id='Parallel'
+          min='0'
+          max='100'
+          value={options.parallel}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+          disabled
+        />
+      </label>
     </section>
   );
 };
