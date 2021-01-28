@@ -110,49 +110,51 @@ const Index = ({ data }) => {
   };
 
   return (
-    <main>
-      <Head>
-        <title>Wake Turbulence Practice Questions</title>
-      </Head>
-      <div className='icon-nav-container'>
-        <IconNav page={page} setStart={setStart} setPage={setPage} />
-      </div>
-      {/* Displays the list of aircraft being used to generate questions for user to reference. */}
-      {page === 'list' ? (
-        <AircraftList data={data} backButton={setPage} />
-      ) : (
-        <div>
-          {/*start quiz page */}
-          {start ? (
-            <Question questionData={questionData} />
-          ) : (
-            <Instructions start={setStart} options={options} setOptions={setOptions} />
-          )}
-          <Answers start={start} onClick={handleClick} answer={answer} />
-
-          <section id='controls'>
-            <Button
-              label={<FontAwesomeIcon icon={faCheckCircle} className='color-green' />}
-              value={0}
-              onClick={() => checkAnswer()}
-              disabled={!start}
-              className={''}
-            />
-            <Button
-              label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
-              value={0}
-              onClick={() => setNextQuestion(nextQuestion + 1)}
-              disabled={!start}
-              className={''}
-            />
-          </section>
+    <div id='page'>
+      <main>
+        <Head>
+          <title>Wake Turbulence Practice Questions</title>
+        </Head>
+        <div className='icon-nav-container'>
+          <IconNav page={page} setStart={setStart} setPage={setPage} />
         </div>
-      )}
-      {/*end of quiz page*/}
-      <footer className='footer'>
-        <img src='/circle-logo.svg' alt='pointsixtyfive logo' /> <span className='color-white'>pointSixtyfive</span>
-      </footer>
-    </main>
+        {/* Displays the list of aircraft being used to generate questions for user to reference. */}
+        {page === 'list' ? (
+          <AircraftList data={data} backButton={setPage} />
+        ) : (
+          <div>
+            {/*start quiz page */}
+            {start ? (
+              <Question questionData={questionData} />
+            ) : (
+              <Instructions start={setStart} options={options} setOptions={setOptions} />
+            )}
+            <Answers start={start} onClick={handleClick} answer={answer} />
+
+            <section id='controls'>
+              <Button
+                label={<FontAwesomeIcon icon={faCheckCircle} className='color-green' />}
+                value={0}
+                onClick={() => checkAnswer()}
+                disabled={!start}
+                className={''}
+              />
+              <Button
+                label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
+                value={0}
+                onClick={() => setNextQuestion(nextQuestion + 1)}
+                disabled={!start}
+                className={''}
+              />
+            </section>
+          </div>
+        )}
+        {/*end of quiz page*/}
+        <footer className='footer'>
+          <img src='/circle-logo.svg' alt='pointsixtyfive logo' /> <span className='color-white'>pointSixtyfive</span>
+        </footer>
+      </main>
+    </div>
   );
 };
 
