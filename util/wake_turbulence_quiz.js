@@ -92,7 +92,7 @@ function generateQuestion(aircraftList, options) {
     if (
       (leadWake === 5 && trailWake <= 5 && leadDepPoint === trailDepPoint) ||
       (leadWake === 4 && trailWake <= 2 && leadDepPoint === trailDepPoint) ||
-      (leadWake === 6 && trailWake === 5)
+      (leadWake === 6 && trailWake >= 5)
     ) {
       answer.wakeTime = 2;
 
@@ -117,8 +117,10 @@ function generateQuestion(aircraftList, options) {
         answer.wakeTime = 3;
       }
     } else {
-      console.error('something is wrong with the wake turbulence comparison');
-      alert('There was an error:', questionData);
+      console.error('Something is wrong with the wake turbulence comparison');
+      alert(
+        'There was an error calculating the wake turbulence. Please ignore this question and report the error with the a/c types and positions in the support forum.'
+      );
     }
 
     return answer;
