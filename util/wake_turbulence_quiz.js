@@ -1,6 +1,14 @@
 'use strict';
 
-function generateQuestion(aircraftList) {
+//Default options. Numerical value 0 - 100 to represent the frequency an aircraft is assigned to one of the cases. 0 turns off the option
+export const defaultOptions = {
+  parallel: 0,
+  opposite: 10,
+  crossing: 15,
+  intersection: 35,
+};
+
+function generateQuestion(aircraftList, options) {
   const random = (min = 1, max = 100) => Math.floor(Math.random() * max + min);
 
   //Pull two random aircraft from the array
@@ -18,27 +26,26 @@ function generateQuestion(aircraftList) {
 
   //Set the departure positions for each aircraft
   //Randomly select departure position based on if the aircraft can accept an intersection
-  function getDeparturePoint(arr) {
+  function getDeparturePoint(arr, intersectionChance = options.intersection) {
     return arr.map((aircraft) => {
       let num = random();
 
-      if (aircraft.intersection === true && num > 30) {
-        return 'intersection';
-      } else {
-        return 'full length';
-      }
+      return aircraft.intersection === true && intersectionChance > 0 && num <= options.intersection
+        ? 'intersection'
+        : 'full length';
     });
   }
 
   const [leadDepPoint, trailDepPoint] = getDeparturePoint([lead, trail]);
 
-  //Randomly assign departure from an intersecting runway or opposite direction. use -1 to disable crossing or odo.
-  //need to work on this to allow for disabling either situation. for now just use defaults.
-  function assignRwy(odoChance = 10, crossingChance = 30) {
+  //Randomly assign departure from an intersecting runway or opposite direction. use 0 to disable crossing or odo.
+  function assignRwy(odoChance = options.opposite, crossingChance = options.crossing) {
     let num = random();
+    if (odoChance > 50) odoChance = 50;
+    if (crossingChance > 50) crossingChance = 50;
 
-    if (odoChance > 0 && num >= 100 - odoChance) return 'opposite';
-    if (crossingChance > 0 && num >= 65) return 'crossing';
+    if (odoChance > 0 && num <= odoChance) return 'opposite';
+    if (crossingChance > 0 && num >= 100 - crossingChance) return 'crossing';
     return '';
   }
 
