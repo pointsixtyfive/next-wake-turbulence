@@ -8,6 +8,7 @@ import Instructions from '../components/Instructions';
 import Question from '../components/Question';
 import Button from '../components/Button';
 import IconNav from '../components/IconNav';
+import Score from '../components/Score';
 import generateQuestion from '../util/wake_turbulence_quiz';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -32,6 +33,8 @@ const Index = ({ data }) => {
   const [questionData, setQuestionData] = useState({});
   const [nextQuestion, setNextQuestion] = useState(1);
   const [answer, setAnswer] = useState({ wakeTime: 'None', waiveable: 'N/A' });
+  const [score, setScore] = useState({ correct: 0, attempted: 0 });
+  const [hasBeenChecked, setHasBeenChecked] = useState(false);
   const [options, setOptions] = useState({
     parallel: 0,
     opposite: 10,
@@ -74,11 +77,32 @@ const Index = ({ data }) => {
       if (q[key] != answer[key]) {
         //wrong answer
         answerNotification(false);
+
+        if (!hasBeenChecked) {
+          setHasBeenChecked(true);
+
+          setScore((prevScore) => {
+            prevScore.attempted += 1;
+            return prevScore;
+          });
+        }
+
         return 'wrong answer';
       }
     }
     //correct answer
     answerNotification(true);
+
+    if (!hasBeenChecked) {
+      setHasBeenChecked(true);
+
+      setScore((prevScore) => {
+        prevScore.correct += 1;
+        prevScore.attempted += 1;
+        return prevScore;
+      });
+    }
+
     return 'correct';
   };
 
@@ -116,6 +140,7 @@ const Index = ({ data }) => {
           <title>Wake Turbulence Practice Questions</title>
         </Head>
         <div className='icon-nav-container'>
+          <Score score={score} />
           <IconNav page={page} setStart={setStart} setPage={setPage} />
         </div>
         {/* Displays the list of aircraft being used to generate questions for user to reference. */}
@@ -142,7 +167,10 @@ const Index = ({ data }) => {
               <Button
                 label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
                 value={0}
-                onClick={() => setNextQuestion(nextQuestion + 1)}
+                onClick={() => {
+                  setNextQuestion(nextQuestion + 1);
+                  setHasBeenChecked(false);
+                }}
                 disabled={!start}
                 className={''}
               />
