@@ -35,6 +35,7 @@ const Index = ({ data }) => {
   const [answer, setAnswer] = useState({ wakeTime: 'None', waiveable: 'N/A' });
   const [score, setScore] = useState({ correct: 0, attempted: 0 });
   const [hasBeenChecked, setHasBeenChecked] = useState(false);
+  const [autoAdvance, setAutoAdvance] = useState(true);
   const [options, setOptions] = useState({
     parallel: 0,
     opposite: 10,
@@ -102,13 +103,22 @@ const Index = ({ data }) => {
         return prevScore;
       });
     }
-
+    if (autoAdvance) {
+      setTimeout(function timeoutToAdvance() {
+        goToNextQuestion();
+      }, 2200);
+    }
     return 'correct';
   };
 
-  const clearAnswer = () => {
+  function goToNextQuestion() {
+    setNextQuestion(nextQuestion + 1);
+    setHasBeenChecked(false);
+  }
+
+  function clearAnswer() {
     setAnswer({ wakeTime: 'None', waiveable: 'N/A' });
-  };
+  }
 
   const toastId = useRef(null);
   const answerNotification = (correct) => {
@@ -141,7 +151,13 @@ const Index = ({ data }) => {
         </Head>
         <div className='icon-nav-container'>
           <Score score={score} />
-          <IconNav page={page} setStart={setStart} setPage={setPage} />
+          <IconNav
+            page={page}
+            setStart={setStart}
+            setPage={setPage}
+            autoAdvance={autoAdvance}
+            setAutoAdvance={setAutoAdvance}
+          />
         </div>
         {/* Displays the list of aircraft being used to generate questions for user to reference. */}
         {page === 'list' ? (
@@ -152,7 +168,7 @@ const Index = ({ data }) => {
             {start ? (
               <Question questionData={questionData} />
             ) : (
-              <Instructions start={setStart} options={options} setOptions={setOptions} />
+              <Instructions start={setStart} options={options} setOptions={setOptions} attempts={score.attempted} />
             )}
             <Answers start={start} onClick={handleClick} answer={answer} />
 
@@ -168,8 +184,7 @@ const Index = ({ data }) => {
                 label={<FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />}
                 value={0}
                 onClick={() => {
-                  setNextQuestion(nextQuestion + 1);
-                  setHasBeenChecked(false);
+                  goToNextQuestion();
                 }}
                 disabled={!start}
                 className={''}

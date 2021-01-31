@@ -297,6 +297,10 @@ ul.ac-list {
   color: #72e16e;
 }
 
+.color-grey {
+  color: #939393;
+}
+
 .icon-nav-container {
   display: flex;
   justify-content: space-between;
@@ -307,7 +311,7 @@ ul.ac-list {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  width: 50px;
+  width: 75px;
 }
 
 .score {

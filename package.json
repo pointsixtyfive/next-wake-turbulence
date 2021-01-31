@@ -1,6 +1,6 @@
 {
   "name": "wake-turbulence-quiz",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": "https://github.com/pointsixtyfive/next-wake-turbulence",
   "scripts": {
     "dev": "next dev",
