@@ -105,10 +105,16 @@ input {
   color: #9c9c9c;
 }
 
-.options input[type='number']::-webkit-inner-spin-button,
-.options input[type='number']::-webkit-outer-spin-button {
+/* Chrome, Safari, Edge, Opera */
+.options input::-webkit-outer-spin-button,
+.options input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Firefox */
+.options input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 #start {
@@ -218,6 +224,7 @@ input {
   margin-right: 4px;
 }
 
+/* Aircraft List */
 h2 {
   font-size: 1.25em;
   margin: 1em 2em;
@@ -280,6 +287,8 @@ ul.ac-list {
   font-weight: bold;
 }
 
+/* *** */
+
 .color-white {
   color: #ffffff;
 }
@@ -310,9 +319,11 @@ ul.ac-list {
 }
 
 .Toastify__toast-body {
+  flex: 1 1 auto;
   text-align: center;
 }
 
+/* Airport Images */
 .airportContainer {
   position: relative;
   max-width: 420px;
@@ -385,6 +396,8 @@ ul.ac-list {
   font-size: 0.75rem;
   color: #0099ff;
 }
+
+/* *** */
 
 @media (max-width: 620px) {
   #answer button {
