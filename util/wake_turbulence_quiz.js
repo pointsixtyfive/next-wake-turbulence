@@ -64,6 +64,7 @@ function generateQuestion(aircraftList, options) {
   const leadWake = lead.weightScore;
   const trailWake = trail.weightScore;
 
+  //Basic check to find cases with wt req. Only compares the weight classes, does not check for situations where dep point alters the req.
   function isWake(lead, trail) {
     if (lead < 5 && lead === trail) {
       return false;
@@ -114,17 +115,25 @@ function generateQuestion(aircraftList, options) {
     }
   }
 
-  const answer = getAnswer();
-  questionData.answer = answer;
+  try {
+    const answer = getAnswer();
+    questionData.answer = answer;
 
-  if (questionData.answer.wakeTime === undefined) {
-    console.error('Something is wrong with the wake turbulence comparison: ', questionData);
-    throw new Error(
-      'Wake Time is undefined. \nThere was an error calculating the wake turbulence. Please ignore this question and report the error with the a/c types and positions in the support forum.'
-    );
+    if (questionData.answer.wakeTime === undefined) {
+      console.error('Something is wrong with the wake turbulence comparison: ', questionData);
+      throw new Error(
+        `There was an error calculating the wake turbulence. If able, report the error with the a/c types and positions in the support forum.
+        ${questionData.lead.name} @ ${questionData.lead.departurePoint} --- ${questionData.trail.name} @ ${questionData.trail.departurePoint}`
+      );
+    }
+
+    return questionData;
+  } catch (error) {
+    alert(error);
+    setTimeout(() => {
+      generateQuestion();
+    }, 3000);
   }
-
-  return questionData;
 }
 
 export default generateQuestion;

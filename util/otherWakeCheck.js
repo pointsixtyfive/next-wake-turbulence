@@ -10,8 +10,8 @@ function otherWakeCheck(data) {
     //Opposite direction, or Large full length in front of smaller at intersection
     if ((leadDepPoint === 'full length' && trailDepPoint === 'intersection') || odo) {
       answer.wakeTime = 3;
-    } else if (leadDepPoint === 'intersection') {
-      //Large from intersection in front of smaller at full length
+    } else if (leadDepPoint === 'intersection' || leadDepPoint === trailDepPoint) {
+      //Large from intersection in front of smaller at full length, or both at same point
       Object.assign(answer, { wakeTime: 'None', waiveable: 'N/A' });
     }
 
