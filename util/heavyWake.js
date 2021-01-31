@@ -4,7 +4,6 @@ function heavyWakeCheck(data) {
   //add one minute for supers
   function isSuper() {
     if (leadWake == 6) answer.wakeTime++;
-    console.log(leadWake == 6);
     return leadWake == 6; //for debugging only
   }
 
