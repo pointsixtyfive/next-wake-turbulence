@@ -19,7 +19,7 @@ const Instructions = ({ start, options, setOptions, attempts }) => {
       </p>
 
       <p>
-        Select the wake turbulence time requirement and if that requirement is waivealbe or not. Use the buttons below
+        Select the wake turbulence time requirement and if that requirement is waiveable or not. Use the buttons below
         to enter your answer, then check it with the <FontAwesomeIcon icon={faCheckCircle} className='color-green' />{' '}
         button. Go to the next question with the <FontAwesomeIcon icon={faChevronCircleRight} className='color-white' />{' '}
         button. Return to these instructions by clicking the{' '}
