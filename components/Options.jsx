@@ -55,19 +55,18 @@ const Options = ({ options, setOptions }) => {
         />
       </label>
       {/* Not implemented yet */}
-      <label htmlFor='Parallel'>
+      <label htmlFor='parallel'>
         Parallel:
         <input
           type='number'
-          name='Parallel'
-          id='Parallel'
+          name='parallel'
+          id='parallel'
           min='0'
-          max='100'
+          max='50'
           value={options.parallel}
           onChange={(e) => {
             handleChange(e);
           }}
-          disabled
         />
       </label>
     </section>

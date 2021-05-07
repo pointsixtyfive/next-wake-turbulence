@@ -6,8 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0 auto;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   max-width: 800px;
   background-color: #000000;
   color: #0099ff;
@@ -371,6 +370,14 @@ ul.ac-list {
 .trail.opposite {
   left: 80%;
   transform: rotate(180deg);
+}
+
+.lead:is(.full, .intersection, .opposite).parallel {
+  top: 23%;
+}
+
+.trail:is(.full, .intersection, .opposite).parallel {
+  top: 32%;
 }
 
 .legend {
