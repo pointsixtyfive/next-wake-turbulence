@@ -15,7 +15,8 @@ const Instructions = ({ start, options, setOptions, attempts }) => {
     <section id='instructions'>
       <p>
         Qustions are randomly generated. Use the options below to increase/decrease the rate at which an aircraft is
-        placed at that position. Use 0 to disable that position.
+        placed at that position. Use 0 to disable that position. Parallel runways are 2500&apos; apart, and flight paths
+        do not cross.
       </p>
 
       <p>

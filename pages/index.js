@@ -37,7 +37,7 @@ const Index = ({ data }) => {
   const [hasBeenChecked, setHasBeenChecked] = useState(false);
   const [autoAdvance, setAutoAdvance] = useState(true);
   const [options, setOptions] = useState({
-    parallel: 0,
+    parallel: 5,
     opposite: 10,
     crossing: 15,
     intersection: 35,

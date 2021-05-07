@@ -13,13 +13,13 @@ const IconNav = ({ setStart, page, setPage, autoAdvance, setAutoAdvance }) => {
 
   return (
     <nav className='icon-nav'>
-      <a href='#' onClick={(e) => autoAdvanceToggle(e)}>
+      <a onClick={(e) => autoAdvanceToggle(e)}>
         <FontAwesomeIcon icon={faCaretSquareRight} className={autoAdvance ? 'color-white' : 'color-grey'} />
       </a>
-      <a href='#' onClick={() => setStart(false)}>
+      <a onClick={() => setStart(false)}>
         <FontAwesomeIcon icon={faInfoCircle} className='color-white' />
       </a>
-      <a href='#' onClick={() => acListToggle()}>
+      <a onClick={() => acListToggle()}>
         <FontAwesomeIcon icon={faPlane} className='color-white' />
       </a>
     </nav>

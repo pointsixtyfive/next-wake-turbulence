@@ -9,6 +9,7 @@ const Question = ({ questionData }) => {
     'full length': 'the full length',
     crossing: 'a crossing runway',
     opposite: 'opposite direction',
+    parallel: 'the parallel',
   };
 
   function depPoint(ac) {
@@ -16,6 +17,10 @@ const Question = ({ questionData }) => {
       return labels[ac.runway];
     }
     return labels[ac.departurePoint];
+  }
+
+  function isParallel(ac) {
+    return ac.parallel;
   }
 
   function position(ac, acId) {
@@ -49,11 +54,16 @@ const Question = ({ questionData }) => {
             <FontAwesomeIcon icon={faPlane} /> {trail.name}
           </div>
         </div>
-        <FontAwesomeIcon icon={faPlane} className={position(lead, 'lead')} />
-        <FontAwesomeIcon icon={faPlane} className={position(trail, 'trail')} />
+        <FontAwesomeIcon icon={faPlane} className={`${position(lead, 'lead')} ${isParallel(lead) ? 'parallel' : ''}`} />
+        <FontAwesomeIcon
+          icon={faPlane}
+          className={`${position(trail, 'trail')} ${isParallel(trail) ? 'parallel' : ''}`}
+        />
         <img src='./airport.svg' alt='Academy Airport' className='airport' />
       </div>
-      <p>{`${trail.name} departing from ${depPoint(trail)} behind a ${lead.name} at ${depPoint(lead)}.`}</p>
+      <p>{`${trail.name} departing from ${depPoint(trail)} behind a ${lead.name} ${
+        depPoint(lead) == 'opposite direction' ? '' : 'at'
+      } ${depPoint(lead)}.`}</p>
     </section>
   );
 };
