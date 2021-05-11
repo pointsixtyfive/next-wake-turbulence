@@ -1,12 +1,12 @@
+//add one minute for supers
+export function isSuper(leadWake, answer) {
+  if (leadWake == 6) answer.wakeTime++;
+  return leadWake == 6; //for debugging only
+}
+
 function heavyWakeCheck(data) {
   const { odo, crossing, leadWake, trailWake, leadDepPoint, trailDepPoint, answer } = data;
-
-  //add one minute for supers
-  function isSuper() {
-    if (leadWake == 6) answer.wakeTime++;
-    return leadWake == 6; //for debugging only
-  }
-
+  console.log(data);
   if (!odo && !crossing) {
     //standard intersection
     if (
@@ -16,7 +16,7 @@ function heavyWakeCheck(data) {
     ) {
       answer.wakeTime = 2;
 
-      isSuper();
+      isSuper(leadWake, answer);
 
       return answer;
     }
