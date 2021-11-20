@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlane } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faPlane } from '@fortawesome/free-solid-svg-icons';
 
 const Question = ({ questionData }) => {
   const { trail, lead } = questionData;
@@ -54,6 +54,11 @@ const Question = ({ questionData }) => {
             <FontAwesomeIcon icon={faPlane} /> {trail.name}
           </div>
         </div>
+
+        <div className='error-report'>
+          <FontAwesomeIcon icon={faBug} />
+        </div>
+
         <FontAwesomeIcon icon={faPlane} className={`${position(lead, 'lead')} ${isParallel(lead) ? 'parallel' : ''}`} />
         <FontAwesomeIcon
           icon={faPlane}
