@@ -8,7 +8,7 @@ function heavyWakeCheck(data) {
   const { odo, crossing, leadWake, trailWake, leadDepPoint, trailDepPoint, answer } = data;
   console.log(data);
   if (!odo && !crossing) {
-    //standard intersection
+    //standard intersection. TODO: double check this
     if (
       (leadWake === 5 && trailWake <= 5 && leadDepPoint === trailDepPoint) ||
       (leadWake === 4 && trailWake <= 2 && leadDepPoint === trailDepPoint) ||
@@ -20,12 +20,13 @@ function heavyWakeCheck(data) {
 
       return answer;
     }
+    //TODO: Am I missing the intersection check?
   } else if (crossing) {
     //crossing runways - check for crossing first to skip odo check, since an "odo" operation won't be on the same runway and therefore not really odo.
     if (leadWake >= 5 || (leadWake == 4 && trailWake <= 2)) {
       answer.wakeTime = 2;
 
-      isSuper();
+      isSuper(leadWake, answer);
 
       return answer;
     }
@@ -35,7 +36,7 @@ function heavyWakeCheck(data) {
       answer.wakeTime = 3;
     }
 
-    isSuper();
+    isSuper(leadWake, answer);
   }
 
   return answer;

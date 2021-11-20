@@ -1,4 +1,6 @@
 import { isSuper } from './heavyWake';
+import heavyWakeCheck from './heavyWake';
+
 //  {
 //     odo: false,
 //     crossing: false,
@@ -19,6 +21,7 @@ test('should identify a super and add one minute to wake time', () => {
       waiveable: false,
     },
   };
+
   expect(isSuper(leadWake, answer)).toBe(false);
   expect(answer.wakeTime).toBe(3);
 
@@ -27,4 +30,6 @@ test('should identify a super and add one minute to wake time', () => {
   expect(answer2.wakeTime).toBe(4);
 });
 
-test.todo('should call appropriate function to check for wake (heavyWakeCheck, otherWakeCheck)');
+test.todo('should apply standard rules to non-odo/crossing situations');
+test.todo('should apply crossing rules to crossing situations');
+test.todo('should apply odo rules to odo situations');
