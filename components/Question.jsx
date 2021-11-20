@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faPlane } from '@fortawesome/free-solid-svg-icons';
+import submitBugReport from '../util/submitBugReport';
 
 const Question = ({ questionData }) => {
   const { trail, lead } = questionData;
@@ -55,7 +56,12 @@ const Question = ({ questionData }) => {
           </div>
         </div>
 
-        <div className='error-report'>
+        <div
+          className='error-report'
+          onClick={() => {
+            submitBugReport(questionData, 'some user input');
+          }}
+        >
           <FontAwesomeIcon icon={faBug} />
         </div>
 
