@@ -1,9 +1,5 @@
 //todo: this needs to convert to an api endpoint. the env vars arent available to the front end, plus cors
 async function submitBugReport(questionInfo, userMessage) {
-  let xfUser = process.env.XF_API_USER;
-  let xfKey = process.env.XF_API_KEY;
-
-  console.log(xfUser, xfKey);
   const message = { questionInfo, userMessage };
   const xfPostThreadParams = { node_id: 2, title: 'Some Title', message: message };
   const body = new URLSearchParams(xfPostThreadParams);
