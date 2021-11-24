@@ -1,24 +1,19 @@
 //todo: this needs to convert to an api endpoint. the env vars arent available to the front end, plus cors
-async function submitBugReport(questionInfo, userMessage) {
-  const message = { questionInfo, userMessage };
-  const xfPostThreadParams = { node_id: 2, title: 'Some Title', message: message };
-  const body = new URLSearchParams(xfPostThreadParams);
-
-  const response = await fetch('https://pointsixtyfive.com/dev/api', {
+async function submitBugReport(questionData, userMessage) {
+  const response = await fetch('/api/bug-report', {
     method: 'POST',
-    mode: 'cors',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      'XF-Api-Key': xfKey,
-      'XF-Api-User': xfUser,
+      'Content-Type': 'application/json',
     },
-    body: body,
+
+    body: JSON.stringify({ questionData, userMessage }),
   });
 
-  return response.json();
+  if (response.json().status == 200) {
+    return 'Report submitted. Thank you.';
+  }
+
+  return 'Something went wrong submitting the report. :(';
 }
 
 export default submitBugReport;
-
-//for encoding body as form urlencoded
-//https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
