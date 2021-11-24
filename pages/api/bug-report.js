@@ -1,12 +1,13 @@
 import convertToPostFormat from '../../util/convertToPostFormat';
+import config from '../../util/xfConfig';
 
 export default async (req, res) => {
   const xfUser = process.env.XF_API_USER;
   const xfKey = process.env.XF_API_KEY;
-
+  const { forumIdToSubmitTo, threadPrefixId, threadTitle } = config;
   const xfPostThreadParams = {
-    node_id: 2,
-    title: 'Bug Report',
+    node_id: forumIdToSubmitTo,
+    title: threadTitle,
     message: convertToPostFormat(req.body),
   };
   const body = new URLSearchParams(xfPostThreadParams);

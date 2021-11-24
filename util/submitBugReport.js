@@ -1,4 +1,3 @@
-//todo: this needs to convert to an api endpoint. the env vars arent available to the front end, plus cors
 async function submitBugReport(questionData, userMessage) {
   const response = await fetch('/api/bug-report', {
     method: 'POST',
