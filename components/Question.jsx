@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faPlane } from '@fortawesome/free-solid-svg-icons';
-import submitBugReport from '../util/submitBugReport';
+import BugReport from './BugReport';
 
 const Question = ({ questionData }) => {
+  const [toggleModal, setToggleModal] = useState(false);
   const { trail, lead } = questionData;
   const labels = {
     intersection: 'an intersection',
@@ -12,6 +14,10 @@ const Question = ({ questionData }) => {
     opposite: 'opposite direction',
     parallel: 'the parallel',
   };
+
+  function toggleBugReportModal() {
+    setToggleModal(toggleModal ? false : true);
+  }
 
   function depPoint(ac) {
     if (ac.runway) {
@@ -46,11 +52,17 @@ const Question = ({ questionData }) => {
       <div
         className='error-report'
         onClick={() => {
-          submitBugReport(questionData, 'some user input');
+          toggleBugReportModal();
         }}
       >
         <FontAwesomeIcon icon={faBug} />
       </div>
+
+      <BugReport
+        questionData={questionData}
+        toggleBugReportModal={toggleBugReportModal}
+        style={`display: ${toggleModal ? 'block' : 'none'}`}
+      />
 
       <div className='airportContainer'>
         <div className='legend'>
