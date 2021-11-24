@@ -43,6 +43,15 @@ const Question = ({ questionData }) => {
 
   return (
     <section id='question'>
+      <div
+        className='error-report'
+        onClick={() => {
+          submitBugReport(questionData, 'some user input');
+        }}
+      >
+        <FontAwesomeIcon icon={faBug} />
+      </div>
+
       <div className='airportContainer'>
         <div className='legend'>
           <div className='legend-lead'>
@@ -54,15 +63,6 @@ const Question = ({ questionData }) => {
             <span className='text'>Trail </span>
             <FontAwesomeIcon icon={faPlane} /> {trail.name}
           </div>
-        </div>
-
-        <div
-          className='error-report'
-          onClick={() => {
-            submitBugReport(questionData, 'some user input');
-          }}
-        >
-          <FontAwesomeIcon icon={faBug} />
         </div>
 
         <FontAwesomeIcon icon={faPlane} className={`${position(lead, 'lead')} ${isParallel(lead) ? 'parallel' : ''}`} />
