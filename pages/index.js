@@ -36,6 +36,7 @@ const Index = ({ data }) => {
   const [score, setScore] = useState({ correct: 0, attempted: 0 });
   const [hasBeenChecked, setHasBeenChecked] = useState(false);
   const [autoAdvance, setAutoAdvance] = useState(true);
+  const [bugReportData, setBugReportData] = useState({});
   const [options, setOptions] = useState({
     parallel: 5,
     opposite: 10,
@@ -72,8 +73,10 @@ const Index = ({ data }) => {
   };
 
   const checkAnswer = () => {
-    const q = questionData.answer;
+    //save the current info for bug reports
+    setBugReportData(questionData);
 
+    const q = questionData.answer;
     for (let key in q) {
       if (q[key] != answer[key]) {
         //wrong answer
@@ -192,7 +195,7 @@ const Index = ({ data }) => {
           <div>
             {/*start quiz page */}
             {start ? (
-              <Question questionData={questionData} toast={bugReportNotification} />
+              <Question questionData={questionData} toast={bugReportNotification} bugReportData={bugReportData} />
             ) : (
               <Instructions start={setStart} options={options} setOptions={setOptions} attempts={score.attempted} />
             )}
