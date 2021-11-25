@@ -2,6 +2,11 @@ import convertToPostFormat from '../../util/convertToPostFormat';
 import config from '../../util/xfConfig';
 
 export default async (req, res) => {
+  const { method } = req;
+  if (method !== 'POST') {
+    res.status(405);
+  }
+
   const xfUser = process.env.XF_API_USER;
   const xfKey = process.env.XF_API_KEY;
   const { forumIdToSubmitTo, threadPrefixId, threadTitle } = config;
