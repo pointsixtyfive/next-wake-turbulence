@@ -1,4 +1,37 @@
 export default function (data) {
+  /* 
+  Substitutes a blank template object if the keys are not found in the argument. This can happen if a user 
+  submits a report prior to checking an answer (where the data is initialized).
+  */
+  if (Object.keys(data.questionData).length == 0) {
+    data = {
+      questionData: {
+        lead: {
+          name: 'null',
+          category: 0,
+          weightClass: 'null',
+          weightScore: 0,
+          intersection: true,
+          departurePoint: 'null',
+          runway: 'null',
+          parallel: false,
+        },
+        trail: {
+          name: 'null',
+          category: 0,
+          weightClass: 'null',
+          weightScore: 0,
+          intersection: false,
+          departurePoint: 'null',
+          runway: 'null',
+          parallel: false,
+        },
+        answer: { wakeTime: 'null', waiveable: 'null' },
+      },
+      userMessage: data.userMessage,
+    };
+  }
+
   const {
     questionData: { lead, trail, answer },
   } = data;
@@ -65,4 +98,4 @@ export default function (data) {
   return template.trim();
 }
 
-// {"questionInfo":{"lead":{"name":"FA20","category":3,"weightClass":"Large","weightScore":3,"intersection":true,"departurePoint":"full length","runway":false,"parallel":false},"trail":{"name":"F15","category":3,"weightClass":"Large","weightScore":3,"intersection":false,"departurePoint":"full length","runway":"crossing","parallel":false},"answer":{"wakeTime":"None","waiveable":"N/A"}},"userMessage":"some user input"}
+// {"questionData":{"lead":{"name":"null","category":0,"weightClass":"null","weightScore":0,"intersection":true,"departurePoint":"null","runway":"null","parallel":false},"trail":{"name":"null","category":0,"weightClass":"null","weightScore":0,"intersection":false,"departurePoint":"null","runway":"null","parallel":false},"answer":{"wakeTime":"null","waiveable":"null"}},"userMessage":"null"}
