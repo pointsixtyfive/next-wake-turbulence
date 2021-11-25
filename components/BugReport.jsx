@@ -55,8 +55,6 @@ function BugReport({ toggleBugReportModal, toast, bugReportData }) {
           <textarea
             name='userMessage'
             id='userMessage'
-            cols='30'
-            rows='10'
             autoCapitalize='sentences'
             autoComplete='off'
             autoCorrect='on'
