@@ -62,7 +62,7 @@ function BugReport({ toggleBugReportModal, toast, bugReportData }) {
             autoCorrect='on'
             autoFocus
             maxLength='1000'
-            placeholder='Please describe the issue'
+            placeholder='Please describe the issue. Question data is automaticaly sent with the report.'
             spellCheck='true'
             wrap='soft'
             onChange={(e) => handleInput(e)}
