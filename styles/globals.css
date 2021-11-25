@@ -481,6 +481,20 @@ ul.ac-list {
   cursor: pointer;
 }
 
+.modal button:hover {
+  background-color: var(--primary-color);
+}
+
+.modal button:disabled {
+  background-color: hsl(0, 0%, 84%);
+}
+
+.spinner {
+  color: var(--primary-color);
+  font-size: 5rem;
+  position: absolute;
+}
+
 /* *** */
 
 @media (max-width: 620px) {

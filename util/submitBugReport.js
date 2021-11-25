@@ -9,10 +9,10 @@ async function submitBugReport(questionData, userMessage) {
   });
 
   if (response.json().status == 200) {
-    return 'Report submitted. Thank you.';
+    return { success: true, message: 'Report submitted. Thank you.' };
   }
 
-  return 'Something went wrong submitting the report. :(';
+  return { success: false, message: 'Something went wrong submitting the report. :(' };
 }
 
 export default submitBugReport;
