@@ -4,7 +4,7 @@ import submitBugReport from '../util/submitBugReport';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function BugReport({ questionData, toggleBugReportModal }) {
+function BugReport({ questionData, toggleBugReportModal, toast }) {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,6 +19,8 @@ function BugReport({ questionData, toggleBugReportModal }) {
       console.log(res);
       if (res.success) {
         //show success toast
+        toast(res);
+
         setIsSubmitting(false);
         toggleBugReportModal();
         return 1;
@@ -26,14 +28,16 @@ function BugReport({ questionData, toggleBugReportModal }) {
 
       if (!res.success) {
         //show failure toast
+        toast(res);
 
         setIsSubmitting(false);
         return -1;
       }
     } catch (e) {
       //show failure toast
-      setIsSubmitting(false);
+      toast({ success: false, message: 'There was an error: ', e });
 
+      setIsSubmitting(false);
       return -1;
     }
   }
@@ -86,4 +90,5 @@ export default BugReport;
 BugReport.propTypes = {
   questionData: PropTypes.object.isRequired,
   toggleBugReportModal: PropTypes.func.isRequired,
+  toast: PropTypes.func.isRequired,
 };

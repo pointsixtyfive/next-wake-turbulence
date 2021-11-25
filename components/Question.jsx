@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faPlane } from '@fortawesome/free-solid-svg-icons';
 import BugReport from './BugReport';
 
-const Question = ({ questionData }) => {
+const Question = ({ questionData, toast }) => {
   const [toggleModal, setToggleModal] = useState(false);
   const { trail, lead } = questionData;
   const labels = {
@@ -58,7 +58,9 @@ const Question = ({ questionData }) => {
         <FontAwesomeIcon icon={faBug} />
       </div>
 
-      {toggleModal ? <BugReport questionData={questionData} toggleBugReportModal={toggleBugReportModal} /> : null}
+      {toggleModal ? (
+        <BugReport questionData={questionData} toggleBugReportModal={toggleBugReportModal} toast={toast} />
+      ) : null}
 
       <div className='airportContainer'>
         <div className='legend'>
