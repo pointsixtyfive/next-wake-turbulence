@@ -120,6 +120,8 @@ const Index = ({ data }) => {
     setAnswer({ wakeTime: 'None', waiveable: 'N/A' });
   }
 
+  //Toast Nofitifcations
+  //Answer feedback toast
   const toastId = useRef(null);
   const answerNotification = (correct) => {
     const toastOptions = {
@@ -142,6 +144,30 @@ const Index = ({ data }) => {
       }
     }
   };
+
+  // Bug report toast
+  const bugReportToastId = useRef(null);
+  function bugReportNotification({ success, message }) {
+    const toastOptions = {
+      position: 'bottom-center',
+      autoClose: 2500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    };
+
+    if (success) {
+      if (!toast.isActive(bugReportToastId.current)) {
+        bugReportToastId.current = toast.success(message, toastOptions);
+      }
+    } else {
+      if (!toast.isActive(bugReportToastId.current)) {
+        bugReportToastId.current = toast.error(message, toastOptions);
+      }
+    }
+  }
 
   return (
     <div id='page'>
@@ -166,7 +192,7 @@ const Index = ({ data }) => {
           <div>
             {/*start quiz page */}
             {start ? (
-              <Question questionData={questionData} />
+              <Question questionData={questionData} toast={bugReportNotification} />
             ) : (
               <Instructions start={setStart} options={options} setOptions={setOptions} attempts={score.attempted} />
             )}
