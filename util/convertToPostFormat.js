@@ -97,5 +97,3 @@ export default function (data) {
 
   return template.trim();
 }
-
-// {"questionData":{"lead":{"name":"null","category":0,"weightClass":"null","weightScore":0,"intersection":true,"departurePoint":"null","runway":"null","parallel":false},"trail":{"name":"null","category":0,"weightClass":"null","weightScore":0,"intersection":false,"departurePoint":"null","runway":"null","parallel":false},"answer":{"wakeTime":"null","waiveable":"null"}},"userMessage":"null"}
