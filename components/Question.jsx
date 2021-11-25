@@ -93,4 +93,5 @@ export default Question;
 
 Question.propTypes = {
   questionData: PropTypes.object.isRequired,
+  toast: PropTypes.func.isRequired,
 };
