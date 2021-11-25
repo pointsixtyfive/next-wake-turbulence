@@ -167,7 +167,7 @@ const Index = ({ data }) => {
       }
     } else {
       if (!toast.isActive(bugReportToastId.current)) {
-        bugReportToastId.current = toast.error(message, toastOptions);
+        bugReportToastId.current = toast.error(message, { ...toastOptions, autoClose: false });
       }
     }
   }
