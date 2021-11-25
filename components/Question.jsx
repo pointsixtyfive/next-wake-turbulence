@@ -58,11 +58,7 @@ const Question = ({ questionData }) => {
         <FontAwesomeIcon icon={faBug} />
       </div>
 
-      <BugReport
-        questionData={questionData}
-        toggleBugReportModal={toggleBugReportModal}
-        style={`display: ${toggleModal ? 'block' : 'none'}`}
-      />
+      {toggleModal ? <BugReport questionData={questionData} toggleBugReportModal={toggleBugReportModal} /> : null}
 
       <div className='airportContainer'>
         <div className='legend'>
