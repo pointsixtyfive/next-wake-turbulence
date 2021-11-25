@@ -80,6 +80,8 @@ input {
 
 #instructions > p {
   align-self: flex-start;
+  font-size: clamp(0.9rem, 0.8182rem + 0.3636vw, 1rem);
+  margin: 0;
 }
 
 .options {
@@ -148,6 +150,7 @@ input {
 
 #question p {
   margin-top: 0;
+  font-size: clamp(1rem, 0.5909rem + 1.8182vw, 1.5rem);
 }
 
 #answer {
@@ -440,8 +443,7 @@ ul.ac-list {
   border-radius: 5px;
   border: 5px solid var(--warning-color);
   box-shadow: inset 0px 0px 8px 2px var(--warning-color);
-
-  position: relative;
+  position: absolute;
   z-index: 100;
   color: var(--primary-text);
 }
