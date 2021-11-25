@@ -16,11 +16,10 @@ function BugReport({ questionData, toggleBugReportModal, toast }) {
     setIsSubmitting(true);
     try {
       const res = await submitBugReport(questionData, message);
-      console.log(res);
+
       if (res.success) {
         //show success toast
         toast(res);
-
         setIsSubmitting(false);
         toggleBugReportModal();
         return 1;
@@ -29,14 +28,12 @@ function BugReport({ questionData, toggleBugReportModal, toast }) {
       if (!res.success) {
         //show failure toast
         toast(res);
-
         setIsSubmitting(false);
         return -1;
       }
     } catch (e) {
       //show failure toast
       toast({ success: false, message: 'There was an error: ', e });
-
       setIsSubmitting(false);
       return -1;
     }
