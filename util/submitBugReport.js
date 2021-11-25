@@ -8,7 +8,7 @@ async function submitBugReport(questionData, userMessage) {
     body: JSON.stringify({ questionData, userMessage }),
   });
 
-  if (response.json().status == 200) {
+  if (response.status == 200) {
     return { success: true, message: 'Report submitted. Thank you.' };
   }
 
