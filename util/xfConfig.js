@@ -1,5 +1,5 @@
 export default {
-  forumIdToSubmitTo: 2,
-  threadPrefixId: null,
-  threadTitle: 'Bug Report',
+  forumIdToSubmitTo: 206,
+  threadPrefixId: 21,
+  threadTitle: `Bug Report`,
 };
