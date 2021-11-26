@@ -9,7 +9,7 @@ export default async (req, res) => {
 
   const xfUser = process.env.XF_API_USER;
   const xfKey = process.env.XF_API_KEY;
-  const { forumIdToSubmitTo, threadPrefixId, threadTitle } = config;
+  const { boardUrl, forumIdToSubmitTo, threadPrefixId, threadTitle } = config;
   const xfPostThreadParams = {
     node_id: forumIdToSubmitTo,
     title: threadTitle,
@@ -18,7 +18,7 @@ export default async (req, res) => {
   const body = new URLSearchParams(xfPostThreadParams);
 
   try {
-    let data = await fetch('https://pointsixtyfive.com/dev/api/threads', {
+    let data = await fetch(boardUrl, {
       method: 'POST',
       mode: 'cors',
       headers: {
