@@ -30,6 +30,8 @@ const Instructions = ({ start, options, setOptions, attempts }) => {
         question after a correct answer.
       </p>
 
+      <hr />
+
       <Options options={options} setOptions={setOptions} />
       <Button
         id={'start'}
