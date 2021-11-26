@@ -13,6 +13,7 @@ export default async (req, res) => {
   const xfPostThreadParams = {
     node_id: forumIdToSubmitTo,
     title: threadTitle,
+    threadPrefixId: threadPrefixId,
     message: convertToPostFormat(req.body),
   };
   const body = new URLSearchParams(xfPostThreadParams);
