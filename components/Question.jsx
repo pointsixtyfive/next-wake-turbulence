@@ -50,7 +50,7 @@ const Question = ({ questionData, toast, bugReportData }) => {
   return (
     <section id='question'>
       <div
-        className='error-report'
+        className='bug-report-icon'
         onClick={() => {
           toggleBugReportModal();
         }}
