@@ -2,14 +2,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: hsl(205, 100%, 50%);
+  --secondary-color: hsl(205, 100%, 80%);
+  --background-color: hsl(0, 0%, 0%);
+  --primary-text: hsl(0, 0%, 100%);
+  --lead-aicraft: hsl(0, 60%, 40%);
+  --trail-aicraft: hsl(205, 100%, 50%);
+  --warning-color: hsl(20, 100%, 60%);
+}
+
 html,
 body {
   padding: 0;
   margin: 0 auto;
   font-family: Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   max-width: 800px;
-  background-color: #000000;
-  color: #0099ff;
+  background-color: var(--background-color);
+  color: var(--primary-color);
 }
 
 #page {
@@ -20,7 +30,7 @@ body {
 }
 
 main {
-  background-color: #2c2c2c;
+  background-color: hsl(0, 0%, 17%);
   border: none;
   border-radius: 10px;
   padding: 1rem;
@@ -47,21 +57,21 @@ input {
   flex: 1 1 auto;
   justify-content: center;
   align-items: center;
-  color: #95d4ff;
+  color: var(--secondary-color);
   background-color: #696969;
   border: 1px solid #adadad;
   font-size: 1.5rem;
 }
 
 .button:active {
-  background-color: #ffffff;
-  box-shadow: inset 0px 0px 8px 2px #0099ff70;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: inset 0px 0px 8px 2px hsla(205, 100%, 50%, 0.45);
 }
 
 #instructions {
   font-size: 1rem;
   padding: 0.5rem;
-  background-color: #0e0e0e;
+  background-color: hsl(0, 0%, 5%);
   border-radius: 10px;
   min-height: 350px;
   display: flex;
@@ -70,6 +80,14 @@ input {
 
 #instructions > p {
   align-self: flex-start;
+  font-size: clamp(0.9rem, 0.8182rem + 0.3636vw, 1rem);
+  margin: 0;
+  padding: 4px 0;
+}
+
+hr {
+  height: 1px;
+  width: 100%;
 }
 
 .options {
@@ -86,22 +104,23 @@ input {
   justify-content: center;
   flex: 1 1 25%;
   align-items: baseline;
+  color: var(--primary-text);
 }
 
 .options input {
   margin-left: 4px;
   margin-right: 0;
   width: 46px;
-  background-color: black;
-  color: white;
-  border: 1px solid grey;
+  background-color: var(--background-color);
+  color: var(--primary-text);
+  border: 1px solid hsl(0, 0%, 50%);
   border-radius: 10px;
   text-align: center;
   padding: 2px 4px;
 }
 
 .options input:disabled {
-  color: #9c9c9c;
+  color: hsl(0, 0%, 60%);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -125,10 +144,11 @@ input {
 }
 
 #question {
+  position: relative;
   background-color: #0e0e0e;
-  border: 1px solid #0099ff;
+  border: 1px solid var(--primary-color);
   border-radius: 10px;
-  box-shadow: inset 0px 0px 8px 2px #0099ff88;
+  box-shadow: inset 0px 0px 8px 2px hsla(205, 100%, 50%, 0.55);
   margin: 0;
   min-height: 350px;
   font-size: 1.5em;
@@ -137,6 +157,7 @@ input {
 
 #question p {
   margin-top: 0;
+  font-size: clamp(1rem, 0.5909rem + 1.8182vw, 1.5rem);
 }
 
 #answer {
@@ -176,7 +197,7 @@ input {
   display: flex;
   flex: 1 1 50%;
   justify-content: space-between;
-  color: #ffffff;
+  color: var(--primary-text);
 }
 
 #controls {
@@ -195,16 +216,16 @@ input {
   width: 360px;
   margin: 0 auto;
   padding: 0px 15px;
-  background: #bee1ff;
-  border: 2px solid white;
+  background: hsl(205, 100%, 85%);
+  border: 2px solid hsl(0, 0%, 100%);
   border-radius: 5px;
-  box-shadow: -4px 4px 4px #00000044;
+  box-shadow: -4px 4px 4px hsla(0, 0%, 0%, 0.25);
 }
 
 .footer {
   width: 100%;
   height: 1.5rem;
-  border-top: 2px solid #000000;
+  border-top: 2px solid hsl(0, 0%, 0%);
   margin: 0.5rem;
   padding: 2rem 0 0 0;
   display: flex;
@@ -231,10 +252,11 @@ h2 {
 }
 
 button#back {
-  border: 1px solid black;
+  border: 1px solid hsl(0, 0%, 0%);
   border-radius: 5px;
   padding: 10px;
-  margin: 1em 2em;
+  margin: 1em auto;
+  width: 50%;
 }
 
 .ac-container {
@@ -244,18 +266,18 @@ button#back {
 }
 
 #aircraft-list .ac-container {
-  border: 1px solid #0099ff;
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   margin: 0.5em;
-  background-color: #000f19;
+  background-color: hsl(205, 100%, 5%);
   flex: 1 1 47%;
   justify-content: center;
-  box-shadow: inset 0px 0px 8px 2px #0099ff88;
+  box-shadow: inset 0px 0px 8px 2px hsla(205, 100%, 50%, 0.55);
 }
 
 #aircraft-list > .ac-container {
   border: none;
-  background-color: #2c2c2c;
+  background-color: hsl(0, 0%, 17%);
   box-shadow: none;
 }
 
@@ -289,15 +311,15 @@ ul.ac-list {
 /* *** */
 
 .color-white {
-  color: #ffffff;
+  color: hsl(0, 0%, 100%);
 }
 
 .color-green {
-  color: #72e16e;
+  color: hsl(120, 70%, 65%);
 }
 
 .color-grey {
-  color: #939393;
+  color: hsl(0, 0%, 60%);
 }
 
 .icon-nav-container {
@@ -338,13 +360,13 @@ ul.ac-list {
 }
 
 .lead {
-  color: #942222;
+  color: var(--lead-aicraft);
   position: absolute;
   top: 50%;
 }
 
 .trail {
-  color: #0099ff;
+  color: var(--trail-aicraft);
   position: absolute;
   top: 58%;
 }
@@ -394,18 +416,105 @@ ul.ac-list {
 }
 
 .legend .text {
-  color: #ffffff;
+  color: var(--primary-text);
   font-size: 0.75rem;
   text-align: left;
 }
 
 .legend-lead {
   font-size: 0.75rem;
-  color: #942222;
+  color: var(--lead-aicraft);
 }
 .legend-trail {
   font-size: 0.75rem;
-  color: #0099ff;
+  color: var(--trail-aicraft);
+}
+
+/* Error modal */
+.bug-report-icon {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 5px;
+  color: var(--warning-color);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#bug-report {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(0, 0%, 0%);
+  border-radius: 5px;
+  border: 5px solid var(--warning-color);
+  box-shadow: inset 0px 0px 8px 2px var(--warning-color);
+  position: absolute;
+  z-index: 100;
+  color: var(--primary-text);
+}
+
+#bug-report .modal {
+  max-width: clamp(200px, 400px, 100%);
+  height: clamp(200px, 300px, 100%);
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.modal .close-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: var(--warning-color);
+  cursor: pointer;
+}
+
+.modal .row {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  font-size: clamp(1rem, 0.5909rem + 1.8182vw, 1.5rem);
+  flex: 1 1 100%;
+  justify-content: space-evenly;
+  gap: 1em;
+  margin: 0;
+  align-items: center;
+}
+
+.modal textarea {
+  width: 400px;
+  height: 150px;
+  /* font-size: clamp(0.9rem, 0.8182rem + 0.3636vw, 1rem); */
+}
+.modal button {
+  font-size: 1.2rem;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex: 1 1 25%;
+  justify-content: center;
+  padding: 5px;
+}
+
+.modal button:hover {
+  background-color: var(--primary-color);
+}
+
+.modal button:disabled {
+  background-color: hsl(0, 0%, 84%);
+}
+
+.spinner {
+  color: var(--primary-color);
+  font-size: 5rem;
+  position: absolute;
 }
 
 /* *** */

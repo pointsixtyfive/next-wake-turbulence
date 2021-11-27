@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlane } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faPlane } from '@fortawesome/free-solid-svg-icons';
+import BugReport from './BugReport';
 
-const Question = ({ questionData }) => {
+const Question = ({ questionData, toast, bugReportData }) => {
+  const [toggleModal, setToggleModal] = useState(false);
   const { trail, lead } = questionData;
   const labels = {
     intersection: 'an intersection',
@@ -11,6 +14,10 @@ const Question = ({ questionData }) => {
     opposite: 'opposite direction',
     parallel: 'the parallel',
   };
+
+  function toggleBugReportModal() {
+    setToggleModal(toggleModal ? false : true);
+  }
 
   function depPoint(ac) {
     if (ac.runway) {
@@ -42,6 +49,19 @@ const Question = ({ questionData }) => {
 
   return (
     <section id='question'>
+      <div
+        className='bug-report-icon'
+        onClick={() => {
+          toggleBugReportModal();
+        }}
+      >
+        <FontAwesomeIcon icon={faBug} />
+      </div>
+
+      {toggleModal ? (
+        <BugReport toggleBugReportModal={toggleBugReportModal} toast={toast} bugReportData={bugReportData} />
+      ) : null}
+
       <div className='airportContainer'>
         <div className='legend'>
           <div className='legend-lead'>
@@ -54,6 +74,7 @@ const Question = ({ questionData }) => {
             <FontAwesomeIcon icon={faPlane} /> {trail.name}
           </div>
         </div>
+
         <FontAwesomeIcon icon={faPlane} className={`${position(lead, 'lead')} ${isParallel(lead) ? 'parallel' : ''}`} />
         <FontAwesomeIcon
           icon={faPlane}
@@ -72,4 +93,6 @@ export default Question;
 
 Question.propTypes = {
   questionData: PropTypes.object.isRequired,
+  toast: PropTypes.func.isRequired,
+  bugReportData: PropTypes.object.isRequired,
 };

@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
-let uri = process.env.MONGODB_URI;
-let dbName = process.env.DB_NAME;
+const uri = process.env.MONGODB_URI;
+const dbName = process.env.DB_NAME;
 
 let cachedClient = null;
 let cachedDb = null;
@@ -24,7 +24,7 @@ export async function connectToDatabase() {
     useUnifiedTopology: true,
   });
 
-  const db = await client.db(dbName);
+  const db = client.db(dbName);
 
   cachedClient = client;
   cachedDb = db;
