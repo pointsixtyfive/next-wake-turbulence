@@ -135,6 +135,7 @@ const Index = ({ data }) => {
       pauseOnHover: false,
       draggable: false,
       progress: undefined,
+      theme: 'colored',
     };
 
     if (correct) {
@@ -159,6 +160,7 @@ const Index = ({ data }) => {
       pauseOnHover: false,
       draggable: false,
       progress: undefined,
+      theme: 'dark',
     };
 
     if (success) {
