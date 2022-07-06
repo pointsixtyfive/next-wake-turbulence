@@ -10,7 +10,7 @@ import Button from '../components/Button';
 import IconNav from '../components/IconNav';
 import Score from '../components/Score';
 import generateQuestion from '../util/wake_turbulence_quiz';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
@@ -24,8 +24,6 @@ export async function getStaticProps() {
     props: { data },
   };
 }
-
-toast.configure();
 
 const Index = ({ data }) => {
   const [start, setStart] = useState(false);
@@ -223,6 +221,8 @@ const Index = ({ data }) => {
             </section>
           </div>
         )}
+
+        <ToastContainer />
         {/*end of quiz page*/}
         <footer className='footer'>
           <img src='/circle-logo.svg' alt='pointsixtyfive logo' /> <span className='color-white'>pointSixtyfive</span>
